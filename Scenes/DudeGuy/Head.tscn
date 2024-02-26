@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://dh5xlvibjgqt4"]
+[gd_scene load_steps=14 format=3 uid="uid://dh5xlvibjgqt4"]
 
 [ext_resource type="Texture2D" uid="uid://dj1y8br4x78vx" path="res://Assets/DudeGuy/Head/Default.png" id="1_7a6iu"]
+[ext_resource type="Script" path="res://Scripts/DudeGuy/Head.gd" id="2_g3oiq"]
 [ext_resource type="Texture2D" uid="uid://dratcvyxugigg" path="res://Assets/DudeGuy/Head/Blushed.png" id="2_jv0xx"]
 [ext_resource type="Texture2D" uid="uid://bnmhyh4qhf8o5" path="res://Assets/DudeGuy/Head/HalfCold.png" id="3_e0p5v"]
 [ext_resource type="Texture2D" uid="uid://2hmxbgavr0d7" path="res://Assets/DudeGuy/Head/Hot.png" id="4_8265b"]
@@ -78,6 +79,7 @@ _data = {
 
 [node name="Head" type="Sprite2D"]
 texture = ExtResource("1_7a6iu")
+script = ExtResource("2_g3oiq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

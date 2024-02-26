@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://db4n8fu0trp0t"]
+[gd_scene load_steps=31 format=3 uid="uid://db4n8fu0trp0t"]
 
 [ext_resource type="Texture2D" uid="uid://gt5h8rtxe86i" path="res://Assets/DudeGuy/Mouth/Default.png" id="1_bxple"]
+[ext_resource type="Script" path="res://Scripts/DudeGuy/Mouth.gd" id="2_3qo32"]
 [ext_resource type="Texture2D" uid="uid://ickbpqfq36w1" path="res://Assets/DudeGuy/Mouth/A.png" id="2_ymyr6"]
 [ext_resource type="Texture2D" uid="uid://g58wb3khlx41" path="res://Assets/DudeGuy/Mouth/Amazed.png" id="3_iku0y"]
 [ext_resource type="Texture2D" uid="uid://dv7voclxhojpg" path="res://Assets/DudeGuy/Mouth/Angry.png" id="4_t5gkm"]
@@ -249,7 +250,8 @@ _data = {
 }
 
 [node name="Mouth" type="Sprite2D"]
-texture = ExtResource("14_d65sj")
+texture = ExtResource("2_ymyr6")
+script = ExtResource("2_3qo32")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
