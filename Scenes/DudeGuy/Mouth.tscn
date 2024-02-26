@@ -15,23 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://piitqb5otnyf" path="res://Assets/DudeGuy/Mouth/Scared.png" id="13_6voyh"]
 [ext_resource type="Texture2D" uid="uid://dhhhcfyb014wd" path="res://Assets/DudeGuy/Mouth/U.png" id="14_d65sj"]
 
-[sub_resource type="Animation" id="Animation_vvf16"]
-resource_name = "default"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_bxple")]
-}
-
 [sub_resource type="Animation" id="Animation_sjixn"]
 resource_name = "A"
+length = 0.07
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -92,6 +78,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_cdejl"]
 resource_name = "E"
+length = 0.07
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -122,6 +109,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_js22u"]
 resource_name = "I"
+length = 0.07
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -152,6 +140,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_mjlp5"]
 resource_name = "O"
+length = 0.07
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -212,6 +201,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_wonky"]
 resource_name = "U"
+length = 0.07
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -223,6 +213,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("14_d65sj")]
+}
+
+[sub_resource type="Animation" id="Animation_vvf16"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_bxple")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a5i6l"]
@@ -244,7 +249,7 @@ _data = {
 }
 
 [node name="Mouth" type="Sprite2D"]
-texture = ExtResource("1_bxple")
+texture = ExtResource("14_d65sj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
