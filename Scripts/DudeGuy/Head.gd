@@ -1,33 +1,33 @@
 extends Sprite2D
 
-@onready var animationPlayer= $AnimationPlayer
-@onready var eyebrows = $Eyebrows
-@onready var eyes = $Eyes
-@onready var mouth = $Mouth
+@onready var _animationPlayer= $AnimationPlayer
+@onready var _eyebrows = $Eyebrows
+@onready var _eyes = $Eyes
+@onready var _mouth = $Mouth
 
-var emotionTemp = {'Angry': 'Hot', "Scared": 'Halfcold', "Amazed": 'blushed'}
-var actualTemperature = 'default'
+var _emotionTemp = {'Angry': 'Hot', "Scared": 'Halfcold', "Amazed": 'blushed'}
+var _actualTemperature = 'default'
 
 func _ready():
-	animationPlayer.current_animation = actualTemperature
+	_animationPlayer.current_animation = _actualTemperature
 
 func talk(words: String) -> void:
-	mouth.articulate(words)
+	_mouth.articulate(words)
 
 func emotion(newEmotion: String):
-	if newEmotion in emotionTemp:
-		if animationPlayer.has_animation(emotionTemp[newEmotion]):
-			actualTemperature = emotionTemp[newEmotion]
-			animationPlayer.queue(actualTemperature)
+	if newEmotion in _emotionTemp:
+		if _animationPlayer.has_animation(_emotionTemp[newEmotion]):
+			_actualTemperature = _emotionTemp[newEmotion]
+			_animationPlayer.queue(_actualTemperature)
 		else:
-			print_debug("ERROR: the animation doesnt exist " + emotionTemp[newEmotion])
-			actualTemperature = 'default'
+			print_debug("ERROR: the animation doesnt exist " + newEmotion)
+			_actualTemperature = 'default'
 	else:
-		actualTemperature = 'default'
+		_actualTemperature = 'default'
 	
-	eyebrows.emotion(newEmotion)
-	eyes.emotion(newEmotion)
-	mouth.emotion(newEmotion)
+	_eyebrows.emotion(newEmotion)
+	_eyes.emotion(newEmotion)
+	_mouth.emotion(newEmotion)
 
 func setTemperature(temperature: int):
 	var temperatureAnimation: String
@@ -40,9 +40,9 @@ func setTemperature(temperature: int):
 		temperatureAnimation = 'Hot'
 	else:
 		temperatureAnimation = 'default'
-	if animationPlayer.has_animation(temperatureAnimation):
-		actualTemperature = temperatureAnimation
-		animationPlayer.queue(temperatureAnimation)
+	if _animationPlayer.has_animation(temperatureAnimation):
+		_actualTemperature = temperatureAnimation
+		_animationPlayer.queue(_actualTemperature)
 	else:
 		print_debug("ERROR: the animation doesnt exist " + temperatureAnimation)
-		actualTemperature = 'default'
+		_actualTemperature = 'default'

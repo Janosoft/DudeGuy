@@ -1,11 +1,11 @@
 extends Sprite2D
 
-@onready var animationPlayer= $AnimationPlayer
+@onready var _animationPlayer= $AnimationPlayer
 
-var actualEmotion = 'default'
+var _actualEmotion = 'default'
 
 func _ready():
-	animationPlayer.current_animation = "default"
+	_animationPlayer.current_animation = "default"
 
 func _getVocals(words: String) -> String:
 	#CONVERTS ALEJANDRO MARTIN LODES
@@ -53,16 +53,16 @@ func articulate(words: String) -> void:
 	
 	for caracter in vocals:
 		if caracter in ACCEPT:
-			animationPlayer.queue(caracter)
+			_animationPlayer.queue(caracter)
 		else:
-			animationPlayer.queue('default')
+			_animationPlayer.queue('default')
 	
-	animationPlayer.queue(actualEmotion) # Cierra los labios al terminar
+	_animationPlayer.queue(_actualEmotion) # Cierra los labios al terminar
 
 func emotion(newEmotion: String):
-	if animationPlayer.has_animation(newEmotion):
-		actualEmotion = newEmotion
-		animationPlayer.queue(actualEmotion)
+	if _animationPlayer.has_animation(newEmotion):
+		_actualEmotion = newEmotion
+		_animationPlayer.queue(_actualEmotion)
 	else:
 		print_debug("ERROR: the animation doesnt exist " + newEmotion)
-		actualEmotion = 'default'
+		_actualEmotion = 'default'

@@ -1,16 +1,16 @@
 extends Sprite2D
 
-@onready var animationPlayer= $AnimationPlayer
+@onready var _animationPlayer= $AnimationPlayer
 
-var actualEmotion = 'default'
+var _actualEmotion = 'default'
 
 func _ready():
-	animationPlayer.current_animation = "default"
+	_animationPlayer.current_animation = "default"
 
 func emotion(newEmotion: String):
-	if animationPlayer.has_animation(newEmotion):
-		actualEmotion = newEmotion
-		animationPlayer.queue(actualEmotion)
+	if _animationPlayer.has_animation(newEmotion):
+		_actualEmotion = newEmotion
+		_animationPlayer.queue(_actualEmotion)
 	else:
 		print_debug("ERROR: the animation doesnt exist " + newEmotion)
-		actualEmotion = 'default'
+		_actualEmotion = 'default'

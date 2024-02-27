@@ -1,12 +1,12 @@
 extends Sprite2D
 
-@onready var head = $Head
+@onready var _head = $Head
 
 func talk(words: String) -> void:
-	head.talk(words)
+	_head.talk(words)
 
 func emotion(newEmotion: String):
-	head.emotion(newEmotion)
+	_head.emotion(newEmotion)
 
 func setTemperature(temperature: int):
-	head.setTemperature(temperature)
+	_head.setTemperature(temperature)

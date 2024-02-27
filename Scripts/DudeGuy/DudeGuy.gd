@@ -1,17 +1,24 @@
 extends Sprite2D
 
-@onready var body = $Body
+@onready var _body = $Body
 
-var actualEmotion = 'default'
+#region Status
+var perception : int = 0
+#endregion
+
+var _actualEmotion: String = 'default'
 
 func _ready():
-	emotion(actualEmotion)
+	emotion(_actualEmotion)
 	
 func talk(words: String):
-	body.talk(words)
+	_body.talk(words)
 
 func emotion(newEmotion: String):
-	body.emotion(newEmotion)
+	_body.emotion(newEmotion)
 
-func setTemperature(temperature: int):
-	body.setTemperature(temperature)
+func setTemperature(newTemperature: int):
+	_body.setTemperature(newTemperature)
+
+func setPerception(newPerception: int):
+	perception= newPerception
