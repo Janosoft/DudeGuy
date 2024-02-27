@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2achk0uae2vv"]
+
+[ext_resource type="PackedScene" uid="uid://c3dmqtyel4dmq" path="res://Scenes/DudeGuy/DudeGuy.tscn" id="1_d6uce"]
+[ext_resource type="Script" path="res://Scripts/Places/TestEnvironment.gd" id="1_ngu0u"]
+
+[node name="TestEnvironment" type="Node2D"]
+script = ExtResource("1_ngu0u")
+
+[node name="DudeGuy" parent="." instance=ExtResource("1_d6uce")]
+position = Vector2(104, 158)

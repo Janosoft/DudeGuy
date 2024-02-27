@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3dmqtyel4dmq"]
+
+[ext_resource type="PackedScene" uid="uid://cwavsymwhtco1" path="res://Scenes/DudeGuy/Body.tscn" id="1_8cy8f"]
+[ext_resource type="Script" path="res://Scripts/DudeGuy/DudeGuy.gd" id="1_cj11d"]
+
+[node name="DudeGuy" type="Sprite2D"]
+script = ExtResource("1_cj11d")
+
+[node name="Body" parent="." instance=ExtResource("1_8cy8f")]

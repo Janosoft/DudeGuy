@@ -46,3 +46,23 @@ func _getVocals(words: String) -> String:
 
 	print_debug ("Output: " + response)
 	return response
+
+func articulate(words: String) -> void:
+	var vocals: String = _getVocals(words)
+	const ACCEPT: String = "AEIOU"
+	
+	for caracter in vocals:
+		if caracter in ACCEPT:
+			animationPlayer.queue(caracter)
+		else:
+			animationPlayer.queue('default')
+	
+	animationPlayer.queue(actualEmotion) # Cierra los labios al terminar
+
+func emotion(newEmotion: String):
+	if animationPlayer.has_animation(newEmotion):
+		actualEmotion = newEmotion
+		animationPlayer.queue(actualEmotion)
+	else:
+		print_debug("ERROR: the animation doesnt exist " + newEmotion)
+		actualEmotion = 'default'
