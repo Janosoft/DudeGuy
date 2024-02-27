@@ -7,3 +7,6 @@ func talk(words: String) -> void:
 
 func emotion(newEmotion: String):
 	head.emotion(newEmotion)
+
+func setTemperature(temperature: int):
+	head.setTemperature(temperature)

@@ -12,3 +12,6 @@ func talk(words: String):
 
 func emotion(newEmotion: String):
 	body.emotion(newEmotion)
+
+func setTemperature(temperature: int):
+	body.setTemperature(temperature)

@@ -5,7 +5,7 @@ extends Sprite2D
 @onready var eyes = $Eyes
 @onready var mouth = $Mouth
 
-var emotionTemp = {'angry': 'hot', "scared": 'halfcold', "amazed": 'blushed'}
+var emotionTemp = {'Angry': 'Hot', "Scared": 'Halfcold', "Amazed": 'blushed'}
 var actualTemperature = 'default'
 
 func _ready():
@@ -28,3 +28,21 @@ func emotion(newEmotion: String):
 	eyebrows.emotion(newEmotion)
 	eyes.emotion(newEmotion)
 	mouth.emotion(newEmotion)
+
+func setTemperature(temperature: int):
+	var temperatureAnimation: String
+	#TODO OPTIMIZE
+	if temperature<-2:
+		temperatureAnimation = 'Cold'
+	elif temperature>=-2 and temperature <0:
+		temperatureAnimation = 'HalfCold'
+	elif temperature>0:
+		temperatureAnimation = 'Hot'
+	else:
+		temperatureAnimation = 'default'
+	if animationPlayer.has_animation(temperatureAnimation):
+		actualTemperature = temperatureAnimation
+		animationPlayer.queue(temperatureAnimation)
+	else:
+		print_debug("ERROR: the animation doesnt exist " + temperatureAnimation)
+		actualTemperature = 'default'
