@@ -57,7 +57,8 @@ func articulate(words: String) -> void:
 		else:
 			_animationPlayer.queue('default')
 	
-	_animationPlayer.queue(_actualEmotion) # Cierra los labios al terminar
+	_animationPlayer.queue('default') # Closes the mouth
+	_animationPlayer.queue(_actualEmotion) # back to emotion
 
 func emotion(newEmotion: String):
 	if _animationPlayer.has_animation(newEmotion):
