@@ -23,4 +23,5 @@ func setTemperature(newTemperature: int):
 	_body.setTemperature(_temperature)
 
 func setPerception(newPerception: int):
+	#It's diferent interact to something in a hostile place than a friendly one
 	_perception= newPerception
