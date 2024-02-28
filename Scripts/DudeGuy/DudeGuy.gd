@@ -5,6 +5,7 @@ extends Sprite2D
 #region Status
 var _perception : int = 0
 var _temperature : int = 0
+var _aggressiveness : int = 0
 #endregion
 
 var _actualEmotion: String = 'default'

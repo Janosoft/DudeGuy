@@ -176,3 +176,6 @@ script = ExtResource("2_dceme")
 libraries = {
 "": SubResource("AnimationLibrary_tp4au")
 }
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(100, 0)
