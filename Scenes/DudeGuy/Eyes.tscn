@@ -13,6 +13,7 @@
 
 [sub_resource type="Animation" id="Animation_2ljyi"]
 resource_name = "Amazed"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -28,6 +29,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_dt8qk"]
 resource_name = "Angry"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -43,6 +45,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_a3pid"]
 resource_name = "Disgusted"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -58,6 +61,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ojxq6"]
 resource_name = "Love"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -73,6 +77,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_5sctu"]
 resource_name = "Pain"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -88,6 +93,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_1juuf"]
 resource_name = "Sad"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -103,6 +109,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_5ymr6"]
 resource_name = "Scared"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -118,6 +125,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_wc5n3"]
 resource_name = "Wonder"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -133,6 +141,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_mohnp"]
 resource_name = "default"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -160,7 +169,7 @@ _data = {
 }
 
 [node name="Eyes" type="Sprite2D"]
-texture = ExtResource("2_8pilf")
+texture = ExtResource("1_c43na")
 script = ExtResource("2_dceme")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

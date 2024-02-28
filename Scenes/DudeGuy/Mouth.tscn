@@ -34,6 +34,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_2sixq"]
 resource_name = "Amazed"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -49,6 +50,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_1lg4x"]
 resource_name = "Angry"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -64,6 +66,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_2ojtv"]
 resource_name = "Disgusted"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -95,6 +98,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_o0nw0"]
 resource_name = "Happy"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -126,6 +130,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_tifvf"]
 resource_name = "Love"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -157,6 +162,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_x718u"]
 resource_name = "Pain"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -172,6 +178,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_kxvvm"]
 resource_name = "Sad"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -187,6 +194,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ab0dd"]
 resource_name = "Scared"
+length = 0.17
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
