@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdb013v0a6rnx"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/FurryMonster.gd" id="1_cpexv"]
+[ext_resource type="Texture2D" uid="uid://ckrhrxaje2jur" path="res://Assets/Objects/FurryMonster.png" id="1_y751b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lurmp"]
+size = Vector2(75, 81)
+
+[node name="FurryMonster" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_cpexv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_y751b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_lurmp")

@@ -100,7 +100,7 @@ _data = {
 }
 
 [node name="Head" type="Sprite2D"]
-texture = ExtResource("1_7a6iu")
+texture = ExtResource("2_jv0xx")
 script = ExtResource("2_g3oiq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

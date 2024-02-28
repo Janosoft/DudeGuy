@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2achk0uae2vv"]
+[gd_scene load_steps=5 format=3 uid="uid://c2achk0uae2vv"]
 
 [ext_resource type="PackedScene" uid="uid://c3dmqtyel4dmq" path="res://Scenes/DudeGuy/DudeGuy.tscn" id="1_d6uce"]
 [ext_resource type="Script" path="res://Scripts/Places/TestEnvironment.gd" id="1_ngu0u"]
+[ext_resource type="PackedScene" uid="uid://dh4qhdc3sls1n" path="res://Scenes/Objects/Fire.tscn" id="2_n1d3h"]
+[ext_resource type="PackedScene" uid="uid://cdb013v0a6rnx" path="res://Scenes/Objects/FurryMonster.tscn" id="3_b54fw"]
 
 [node name="TestEnvironment" type="Node2D"]
 script = ExtResource("1_ngu0u")
 
+[node name="Fire" parent="." instance=ExtResource("2_n1d3h")]
+position = Vector2(161, 190)
+
 [node name="DudeGuy" parent="." instance=ExtResource("1_d6uce")]
-position = Vector2(104, 158)
+position = Vector2(19, 167)
+
+[node name="FurryMonster" parent="." instance=ExtResource("3_b54fw")]
+position = Vector2(289, 182)
