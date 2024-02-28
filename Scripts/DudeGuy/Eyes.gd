@@ -1,11 +1,13 @@
 extends Sprite2D
 
 @onready var _animationPlayer= $AnimationPlayer
+
 #region Vision
 @onready var _rayCast = $RayCast2D
 var _rayCastOperatorX = 10
 var _rayCastOperatorY = -10
 const _rayCastSize = 150
+var _lastObjectSeen: Object = null
 #endregion
 
 var _dudeNode : Node2D
@@ -30,6 +32,8 @@ func emotion(newEmotion: String):
 		_actualEmotion = 'default'
 
 func _aim():
+	#MOVES UP AND DOWN
+	#TODO CHECK BODY IS POINTING AHEAD OR BACKWARDS
 	if (_rayCast.target_position.x > _rayCastSize): _rayCastOperatorX *= -1
 	elif (_rayCast.target_position.x < 0): _rayCastOperatorX *= -1
 	if (_rayCast.target_position.y > _rayCastSize): _rayCastOperatorY *= -1
@@ -38,8 +42,8 @@ func _aim():
 	_rayCast.target_position.x+= _rayCastOperatorX
 	_rayCast.target_position.y+= _rayCastOperatorY
 
-func _checkObjectCollision():
-	if _rayCast.is_colliding():
-		_rayCast.enabled = false
-		print_debug(_rayCast.get_collider().name)
-	#TODO how this can be reenabled
+func _checkObjectCollision():	
+	if (_rayCast.is_colliding() and _lastObjectSeen != _rayCast.get_collider()):
+		print_debug('I see ' + _rayCast.get_collider().name)
+		_lastObjectSeen = _rayCast.get_collider()
+		_dudeNode.checkObject(_rayCast.get_collider())
