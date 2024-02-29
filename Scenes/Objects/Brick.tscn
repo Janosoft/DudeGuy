@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://dt8h2m8e6j71a"]
+
+[ext_resource type="Texture2D" uid="uid://duhobqumqau61" path="res://Assets/Objects/Brick.png" id="1_5dbt7"]
+[ext_resource type="Script" path="res://Scripts/Objects/Brick.gd" id="1_jk64g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_327ra"]
+atlas = ExtResource("1_5dbt7")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbuky"]
+atlas = ExtResource("1_5dbt7")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmrcv"]
+atlas = ExtResource("1_5dbt7")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e4n71"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_327ra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbuky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmrcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbuky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_327ra")
+}],
+"loop": false,
+"name": &"default",
+"speed": 25.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdjbm"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y2hwv"]
+size = Vector2(14, 1)
+
+[node name="Brick" type="StaticBody2D"]
+collision_layer = 5
+collision_mask = 14
+script = ExtResource("1_jk64g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e4n71")
+frame = 4
+frame_progress = 1.0
+offset = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gdjbm")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_y2hwv")
+debug_color = Color(0, 0.635294, 0.415686, 0.419608)
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
