@@ -10,7 +10,7 @@ func _ready():
 func _getVocals(words: String) -> String:
 	#CONVERTS ALEJANDRO MARTIN LODES
 	#INTO     AAEEAAAOO AAAIII OOOEE
-	print_debug ("Input: " + words)
+	print_debug (words)
 	words = words.to_upper()
 	var response: String = ""
 	var lastVowel: String = ""
@@ -44,7 +44,7 @@ func _getVocals(words: String) -> String:
 		else:
 			response += words[i]
 
-	print_debug ("Output: " + response)
+	#print_debug ("Output: " + response)
 	return response
 
 func articulate(words: String) -> void:
@@ -60,7 +60,7 @@ func articulate(words: String) -> void:
 	_animationPlayer.queue('default') # Closes the mouth
 	_animationPlayer.queue(_actualEmotion) # back to emotion
 
-func emotion(newEmotion: String):
+func setEmotion(newEmotion: String):
 	if _animationPlayer.has_animation(newEmotion):
 		_actualEmotion = newEmotion
 		_animationPlayer.queue(_actualEmotion)

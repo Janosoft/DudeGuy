@@ -22,15 +22,15 @@ func _ready():
 func talk(words: String) -> void:
 	_mouth.articulate(words)
 
-func emotion(newEmotion: String):
+func setEmotion(newEmotion: String):
 	if newEmotion in _emotionTemperature:
 		_temperature = _emotionTemperature[newEmotion]
 	else:
 		_temperature = 0
 	setTemperature(_temperature)
-	_eyebrows.emotion(newEmotion)
-	_eyes.emotion(newEmotion)
-	_mouth.emotion(newEmotion)
+	_eyebrows.setEmotion(newEmotion)
+	_eyes.setEmotion(newEmotion)
+	_mouth.setEmotion(newEmotion)
 
 func setTemperature(newTemperature: int):
 	_temperature= newTemperature

@@ -9,8 +9,8 @@ var _temperature : int = 0
 func talk(words: String) -> void:
 	_head.talk(words)
 
-func emotion(newEmotion: String):
-	_head.emotion(newEmotion)
+func setEmotion(newEmotion: String):
+	_head.setEmotion(newEmotion)
 
 func setTemperature(newTemperature: int):
 	_temperature= newTemperature

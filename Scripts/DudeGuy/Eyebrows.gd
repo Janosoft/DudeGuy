@@ -7,7 +7,7 @@ var _actualEmotion = 'default'
 func _ready():
 	_animationPlayer.current_animation = "default"
 	
-func emotion(newEmotion: String):
+func setEmotion(newEmotion: String):
 	if _animationPlayer.has_animation(newEmotion):
 		_actualEmotion = newEmotion
 		_animationPlayer.queue(_actualEmotion)

@@ -23,7 +23,7 @@ func _physics_process(delta):
 		_aim()
 		_checkObjectCollision()
 
-func emotion(newEmotion: String):
+func setEmotion(newEmotion: String):
 	if _animationPlayer.has_animation(newEmotion):
 		_actualEmotion = newEmotion
 		_animationPlayer.queue(_actualEmotion)
