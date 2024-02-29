@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://db4n8fu0trp0t"]
+[gd_scene load_steps=33 format=3 uid="uid://db4n8fu0trp0t"]
 
 [ext_resource type="Texture2D" uid="uid://gt5h8rtxe86i" path="res://Assets/DudeGuy/Mouth/Default.png" id="1_bxple"]
 [ext_resource type="Script" path="res://Scripts/DudeGuy/Mouth.gd" id="2_3qo32"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dvhxqt6uk65e6" path="res://Assets/DudeGuy/Mouth/Sad.png" id="12_g2tvb"]
 [ext_resource type="Texture2D" uid="uid://piitqb5otnyf" path="res://Assets/DudeGuy/Mouth/Scared.png" id="13_6voyh"]
 [ext_resource type="Texture2D" uid="uid://dhhhcfyb014wd" path="res://Assets/DudeGuy/Mouth/U.png" id="14_d65sj"]
+[ext_resource type="Texture2D" uid="uid://lbod0almwhpo" path="res://Assets/DudeGuy/Mouth/Wonder.png" id="16_i1rni"]
 
 [sub_resource type="Animation" id="Animation_sjixn"]
 resource_name = "A"
@@ -240,6 +241,22 @@ tracks/0/keys = {
 "values": [ExtResource("1_bxple")]
 }
 
+[sub_resource type="Animation" id="Animation_5dct0"]
+resource_name = "Wonder"
+length = 0.17
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("16_i1rni")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a5i6l"]
 _data = {
 "A": SubResource("Animation_sjixn"),
@@ -255,11 +272,12 @@ _data = {
 "Sad": SubResource("Animation_kxvvm"),
 "Scared": SubResource("Animation_ab0dd"),
 "U": SubResource("Animation_wonky"),
+"Wonder": SubResource("Animation_5dct0"),
 "default": SubResource("Animation_vvf16")
 }
 
 [node name="Mouth" type="Sprite2D"]
-texture = ExtResource("1_bxple")
+texture = ExtResource("3_iku0y")
 script = ExtResource("2_3qo32")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

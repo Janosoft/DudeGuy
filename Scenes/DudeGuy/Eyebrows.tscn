@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://1epegrngdxt0"]
+[gd_scene load_steps=23 format=3 uid="uid://1epegrngdxt0"]
 
 [ext_resource type="Texture2D" uid="uid://dxnfudkpv001w" path="res://Assets/DudeGuy/Eyebrows/Default.png" id="1_v3ieq"]
 [ext_resource type="Texture2D" uid="uid://08jivavhlcvt" path="res://Assets/DudeGuy/Eyebrows/Amazed.png" id="2_f0u4c"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bken2u6qk2kiu" path="res://Assets/DudeGuy/Eyebrows/Sad.png" id="7_8qb2l"]
 [ext_resource type="Texture2D" uid="uid://b83qwjqo3idvs" path="res://Assets/DudeGuy/Eyebrows/Scared.png" id="8_6qcek"]
 [ext_resource type="Texture2D" uid="uid://fn0bpqswho70" path="res://Assets/DudeGuy/Eyebrows/Wonder.png" id="10_1f011"]
+[ext_resource type="Texture2D" uid="uid://bfgakwb78sfv8" path="res://Assets/DudeGuy/Eyebrows/Happy.png" id="11_8matq"]
 
 [sub_resource type="Animation" id="Animation_gor0u"]
 resource_name = "Amazed"
@@ -155,11 +156,28 @@ tracks/0/keys = {
 "values": [ExtResource("1_v3ieq")]
 }
 
+[sub_resource type="Animation" id="Animation_enr5c"]
+resource_name = "Happy"
+length = 0.17
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_8matq")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lqx3p"]
 _data = {
 "Amazed": SubResource("Animation_gor0u"),
 "Angry": SubResource("Animation_h7mrd"),
 "Disgusted": SubResource("Animation_owssw"),
+"Happy": SubResource("Animation_enr5c"),
 "Love": SubResource("Animation_6kg0h"),
 "Pain": SubResource("Animation_o83cd"),
 "Sad": SubResource("Animation_3je40"),
@@ -169,7 +187,7 @@ _data = {
 }
 
 [node name="Eyebrows" type="Sprite2D"]
-texture = ExtResource("1_v3ieq")
+texture = ExtResource("2_f0u4c")
 script = ExtResource("2_heyh0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

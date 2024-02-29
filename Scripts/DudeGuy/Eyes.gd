@@ -33,7 +33,6 @@ func emotion(newEmotion: String):
 
 func _aim():
 	#MOVES UP AND DOWN
-	#TODO CHECK BODY IS POINTING AHEAD OR BACKWARDS
 	if (_rayCast.target_position.x > _rayCastSize): _rayCastOperatorX *= -1
 	elif (_rayCast.target_position.x < 0): _rayCastOperatorX *= -1
 	if (_rayCast.target_position.y > _rayCastSize): _rayCastOperatorY *= -1
