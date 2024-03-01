@@ -60,6 +60,22 @@ tracks/0/keys = {
 "values": [ExtResource("4_eehoq")]
 }
 
+[sub_resource type="Animation" id="Animation_v6hap"]
+resource_name = "Happy"
+length = 0.17
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_s5uyp")]
+}
+
 [sub_resource type="Animation" id="Animation_ojxq6"]
 resource_name = "Love"
 length = 0.17
@@ -156,22 +172,6 @@ tracks/0/keys = {
 "values": [ExtResource("1_c43na")]
 }
 
-[sub_resource type="Animation" id="Animation_v6hap"]
-resource_name = "Happy"
-length = 0.17
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("11_s5uyp")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tp4au"]
 _data = {
 "Amazed": SubResource("Animation_2ljyi"),
@@ -198,3 +198,9 @@ libraries = {
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(100, 0)
 collision_mask = 12
+
+[node name="RayCastTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="RayCastTimer" to="." method="_on_ray_cast_timer_timeout"]
