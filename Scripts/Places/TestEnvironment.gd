@@ -10,7 +10,6 @@ var temperature = 0
 func _ready():
 	dude_guy.setPerception(territoryType)
 	dude_guy.setTemperature(temperature)
-
 #region Emotion Buttons
 func _on_amazed_pressed():
 	dude_guy.setEmotion("Amazed")
