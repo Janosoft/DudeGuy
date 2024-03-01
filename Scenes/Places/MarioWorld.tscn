@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6ny7bto8n3oe"]
+[gd_scene load_steps=8 format=3 uid="uid://b6ny7bto8n3oe"]
 
 [ext_resource type="PackedScene" uid="uid://c3dmqtyel4dmq" path="res://Scenes/DudeGuy/DudeGuy.tscn" id="1_28rhf"]
 [ext_resource type="Script" path="res://Scripts/Places/MarioWorld.gd" id="1_j5ggm"]
 [ext_resource type="Texture2D" uid="uid://bcokutx01q2cd" path="res://Assets/Places/MarioWorld.png" id="2_8awx0"]
 [ext_resource type="PackedScene" uid="uid://dt8h2m8e6j71a" path="res://Scenes/Objects/Brick.tscn" id="2_17rac"]
+[ext_resource type="PackedScene" uid="uid://b7icaeuogcqr8" path="res://Scenes/Objects/TextBox.tscn" id="5_2i6pg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r8vap"]
 texture = ExtResource("2_8awx0")
@@ -370,4 +371,8 @@ position = Vector2(280, 104)
 [node name="DudeGuy" parent="." instance=ExtResource("1_28rhf")]
 position = Vector2(25, 53)
 
+[node name="TextBox" parent="." instance=ExtResource("5_2i6pg")]
+position = Vector2(26, 7)
+
 [connection signal="boringAchievement" from="Brick" to="." method="_on_brick_boring_achievement"]
+[connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]
