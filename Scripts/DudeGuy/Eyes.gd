@@ -4,8 +4,8 @@ extends Sprite2D
 
 #region Vision
 @onready var _rayCast = $RayCast2D
-var _rayCastOperatorX = 10
-var _rayCastOperatorY = -10
+var _rayCastOperatorX = 25
+var _rayCastOperatorY = -15
 const _rayCastSize = 150
 var _lastObjectSeen: Object = null
 #endregion
@@ -43,6 +43,11 @@ func _aim():
 
 func _checkObjectCollision():	
 	if (_rayCast.is_colliding() and _lastObjectSeen != _rayCast.get_collider()):
-		print_debug('I see ' + _rayCast.get_collider().name)
+		#print_debug('I see ' + _rayCast.get_collider().name)
+		_rayCast.enabled = false
+		$RayCastTimer.start()
 		_lastObjectSeen = _rayCast.get_collider()
 		_dudeNode.checkObject(_rayCast.get_collider())
+
+func _on_ray_cast_timer_timeout():
+	_rayCast.enabled = true
