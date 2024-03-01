@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal talkingSignal
 @onready var _body = $Body
 
 #region Status
@@ -15,7 +16,8 @@ var _lastTemperature : int = 0
 func _ready():
 	setEmotion(_actualEmotion)
 	
-func talk(words: String):
+func talk(words: String):	
+	emit_signal('talkingSignal', words, 10)
 	_body.talk(words)
 
 func setEmotion(newEmotion: String):
