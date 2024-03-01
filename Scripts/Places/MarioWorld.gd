@@ -41,7 +41,7 @@ func _controls():
 	
 func _on_brick_boring_achievement():
 	dude_guy.setEmotion("Sad")
+	dude_guy.talk("that was frustrating")
 
-
-func _on_dude_guy_talking_signal(text, time):
-	text_box.setText(text,time)
+func _on_dude_guy_talking_signal(text):
+	text_box.setText(text)

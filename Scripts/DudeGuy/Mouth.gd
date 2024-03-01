@@ -10,7 +10,7 @@ func _ready():
 func _getVocals(words: String) -> String:
 	#CONVERTS ALEJANDRO MARTIN LODES
 	#INTO     AAEEAAAOO AAAIII OOOEE
-	print_debug (words)
+	#print_debug (words)
 	words = words.to_upper()
 	var response: String = ""
 	var lastVowel: String = ""

@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal talkingSignal
 @onready var _body = $Body
+@onready var emotion_timer = $EmotionTimer
 
 #region Status
 var _perception : int = 0
@@ -16,14 +17,20 @@ var _lastTemperature : int = 0
 func _ready():
 	setEmotion(_actualEmotion)
 	
-func talk(words: String):	
-	emit_signal('talkingSignal', words, 10)
+func talk(words: String):
+	emit_signal('talkingSignal', words)
+	if (!emotion_timer.is_stopped()):
+		emotion_timer.stop()
+		emotion_timer.wait_time = len(words) * 0.17
+		emotion_timer.start()
 	_body.talk(words)
 
 func setEmotion(newEmotion: String):
 	_lastEmotion = _actualEmotion
 	_body.setEmotion(newEmotion)
-	if (newEmotion != 'default'): $EmotionTimer.start()
+	if (newEmotion != 'default'):
+		emotion_timer.wait_time = 3 #default value
+		emotion_timer.start()
 
 func setTemperature(newTemperature: int):
 	_lastTemperature= temperature

@@ -2,6 +2,7 @@ extends Node2D
 
 signal achievementUnlocked
 @onready var dude_guy = $DudeGuy
+@onready var text_box = $TextBox
 
 const territoryTypes = {'HOSTILE': -1, 'NEUTRAL': 0, 'FRIENDLY': 1}
 var territoryType = territoryTypes.get('NEUTRAL')
@@ -42,7 +43,6 @@ func _on_wonder_pressed():
 	dude_guy.setEmotion("Wonder")
 #endregion
 
-
 func _on_unlock_achievement_pressed():
 	$UI/Label.visible = true
 	$UI/LabelTimer.start()
@@ -50,3 +50,9 @@ func _on_unlock_achievement_pressed():
 
 func _on_label_timer_timeout():
 	$UI/Label.visible = false
+
+func _on_talk_button_pressed():
+	dude_guy.talk($UI/ControlVoice/TextEdit.text)
+
+func _on_dude_guy_talking_signal(text):
+	text_box.setText(text)
