@@ -65,10 +65,10 @@ func checkObject(thing: Object):
 #region Catch Signals#
 func _on_hitbox_body_entered(body):
 	#print_debug("Trasspassing: " + body.name)
-	if ('temperature' in body):
-		if (body.temperature != 0): setTemperature(body.temperature)
-	if ('aggressiveness' in body):
-		if (body.aggressiveness > 0): setEmotion('Pain')
+	if ('Temperature' in body.status):
+		if (body.status['Temperature'] != 0): setTemperature(body.status['Temperature'])
+	if ('Aggressiveness' in body.status):
+		if (body.status['Aggressiveness'] > 0): setEmotion('Pain')
 
 func _on_hitbox_body_exited(body):
 	#print_debug("Leaving: " + body.name)

@@ -8,4 +8,4 @@ const SPEED = -450.0
 
 func _physics_process(delta):
 	velocity.x = SPEED * delta
-	#move_and_slide()
+	move_and_slide()
