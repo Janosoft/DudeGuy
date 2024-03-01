@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2achk0uae2vv"]
+[gd_scene load_steps=6 format=3 uid="uid://c2achk0uae2vv"]
 
 [ext_resource type="PackedScene" uid="uid://c3dmqtyel4dmq" path="res://Scenes/DudeGuy/DudeGuy.tscn" id="1_d6uce"]
 [ext_resource type="Script" path="res://Scripts/Places/TestEnvironment.gd" id="1_ngu0u"]
 [ext_resource type="PackedScene" uid="uid://dh4qhdc3sls1n" path="res://Scenes/Objects/Fire.tscn" id="2_n1d3h"]
 [ext_resource type="PackedScene" uid="uid://cdb013v0a6rnx" path="res://Scenes/Objects/FurryMonster.tscn" id="3_b54fw"]
+[ext_resource type="PackedScene" uid="uid://b7icaeuogcqr8" path="res://Scenes/Objects/TextBox.tscn" id="5_axfsb"]
 
 [node name="TestEnvironment" type="Node2D"]
 script = ExtResource("1_ngu0u")
@@ -121,13 +122,55 @@ offset_bottom = 48.0
 theme_override_font_sizes/font_size = 8
 text = "Wonder"
 
+[node name="ControlVoice" type="Control" parent="UI"]
+anchors_preset = 0
+offset_left = 113.0
+offset_top = 47.0
+offset_right = 235.0
+offset_bottom = 77.0
+
+[node name="TextEdit" type="TextEdit" parent="UI/ControlVoice"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 7.0
+offset_right = 91.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 8
+text = "hello"
+
+[node name="TalkButton" type="Button" parent="UI/ControlVoice"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 8.0
+offset_right = 116.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 8
+text = "talk"
+
 [node name="ControlSignals" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0
 offset_top = 50.0
-offset_right = 256.0
-offset_bottom = 90.0
+offset_right = 102.0
+offset_bottom = 77.0
+
+[node name="Label" type="Label" parent="UI/ControlSignals"]
+visible = false
+layout_mode = 0
+offset_left = 23.0
+offset_top = 50.0
+offset_right = 231.0
+offset_bottom = 73.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "New Achivement Unlocked"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelTimer" type="Timer" parent="UI/ControlSignals"]
+wait_time = 5.0
+one_shot = true
 
 [node name="Unlock Achievement" type="Button" parent="UI/ControlSignals"]
 layout_mode = 0
@@ -138,23 +181,10 @@ offset_bottom = 24.0
 theme_override_font_sizes/font_size = 8
 text = "Unlock Achievement"
 
-[node name="Label" type="Label" parent="UI"]
-visible = false
-layout_mode = 0
-offset_left = 24.0
-offset_top = 100.0
-offset_right = 232.0
-offset_bottom = 123.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 12
-text = "New Achivement Unlocked"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="TextBox" parent="." instance=ExtResource("5_axfsb")]
+position = Vector2(128, 91)
 
-[node name="LabelTimer" type="Timer" parent="UI"]
-wait_time = 5.0
-one_shot = true
-
+[connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]
 [connection signal="pressed" from="UI/ControlEmotions/Amazed" to="." method="_on_amazed_pressed"]
 [connection signal="pressed" from="UI/ControlEmotions/Angry" to="." method="_on_angry_pressed"]
 [connection signal="pressed" from="UI/ControlEmotions/Default" to="." method="_on_default_pressed"]
@@ -165,5 +195,6 @@ one_shot = true
 [connection signal="pressed" from="UI/ControlEmotions/Sad" to="." method="_on_sad_pressed"]
 [connection signal="pressed" from="UI/ControlEmotions/Scared" to="." method="_on_scared_pressed"]
 [connection signal="pressed" from="UI/ControlEmotions/Wonder" to="." method="_on_wonder_pressed"]
+[connection signal="pressed" from="UI/ControlVoice/TalkButton" to="." method="_on_talk_button_pressed"]
+[connection signal="timeout" from="UI/ControlSignals/LabelTimer" to="." method="_on_label_timer_timeout"]
 [connection signal="pressed" from="UI/ControlSignals/Unlock Achievement" to="." method="_on_unlock_achievement_pressed"]
-[connection signal="timeout" from="UI/LabelTimer" to="." method="_on_label_timer_timeout"]
