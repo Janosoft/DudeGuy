@@ -372,7 +372,7 @@ position = Vector2(280, 104)
 position = Vector2(25, 53)
 
 [node name="TextBox" parent="." instance=ExtResource("5_2i6pg")]
-position = Vector2(26, 7)
+position = Vector2(25, 7)
 
 [connection signal="boringAchievement" from="Brick" to="." method="_on_brick_boring_achievement"]
 [connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]

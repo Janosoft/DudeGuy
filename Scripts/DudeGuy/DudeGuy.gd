@@ -29,7 +29,6 @@ func setEmotion(newEmotion: String):
 	_lastEmotion = _actualEmotion
 	_body.setEmotion(newEmotion)
 	if (newEmotion != 'default'):
-		emotion_timer.wait_time = 3 #default value
 		emotion_timer.start()
 
 func setTemperature(newTemperature: int):
