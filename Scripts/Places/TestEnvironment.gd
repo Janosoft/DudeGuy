@@ -4,7 +4,7 @@ signal achievementUnlocked
 @onready var dude_guy = $DudeGuy
 @onready var text_box = $TextBox
 
-const territoryTypes = {'HOSTILE': -1, 'NEUTRAL': 0, 'FRIENDLY': 1}
+const territoryTypes = {'FRIENDLY': -1, 'NEUTRAL': 0, 'HOSTILE': 1}
 var territoryType = territoryTypes.get('NEUTRAL')
 var temperature = 0
 
