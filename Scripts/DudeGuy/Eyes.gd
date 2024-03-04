@@ -51,3 +51,9 @@ func _checkObjectCollision():
 
 func _on_ray_cast_timer_timeout():
 	_rayCast.enabled = true
+
+
+func _on_wink_timer_timeout():
+	$BlinkTimer.wait_time = randi() % (10 - 7 + 1) + 7 #Random between 7 - 10 secs
+	_animationPlayer.queue("Blink")
+	_animationPlayer.queue(_actualEmotion) #Restores actual emotion

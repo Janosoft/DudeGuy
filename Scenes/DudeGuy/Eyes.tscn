@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://bfjein5oqpmf5"]
+[gd_scene load_steps=25 format=3 uid="uid://bfjein5oqpmf5"]
 
 [ext_resource type="Texture2D" uid="uid://bsw1e1dk7qrb8" path="res://Assets/DudeGuy/Eyes/Default.png" id="1_c43na"]
 [ext_resource type="Texture2D" uid="uid://c0rm5j8gqcdwt" path="res://Assets/DudeGuy/Eyes/Amazed.png" id="2_8pilf"]
 [ext_resource type="Script" path="res://Scripts/DudeGuy/Eyes.gd" id="2_dceme"]
 [ext_resource type="Texture2D" uid="uid://bmlmps6kyfqs1" path="res://Assets/DudeGuy/Eyes/Angry.png" id="3_tao8p"]
 [ext_resource type="Texture2D" uid="uid://esfpw3x72dbn" path="res://Assets/DudeGuy/Eyes/Disgusted.png" id="4_eehoq"]
+[ext_resource type="Texture2D" uid="uid://bua80c0lxmaua" path="res://Assets/DudeGuy/Eyes/Blink.png" id="4_wkqb2"]
 [ext_resource type="Texture2D" uid="uid://cn4jv1xmbyo26" path="res://Assets/DudeGuy/Eyes/Love.png" id="5_a2xso"]
 [ext_resource type="Texture2D" uid="uid://crcrina2t2hmx" path="res://Assets/DudeGuy/Eyes/Pain.png" id="6_ep5f3"]
 [ext_resource type="Texture2D" uid="uid://cjylm8us3n0qe" path="res://Assets/DudeGuy/Eyes/Sad.png" id="7_3step"]
@@ -42,6 +43,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("3_tao8p")]
+}
+
+[sub_resource type="Animation" id="Animation_2kryh"]
+resource_name = "Wink"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_wkqb2")]
 }
 
 [sub_resource type="Animation" id="Animation_a3pid"]
@@ -176,6 +193,7 @@ tracks/0/keys = {
 _data = {
 "Amazed": SubResource("Animation_2ljyi"),
 "Angry": SubResource("Animation_dt8qk"),
+"Blink": SubResource("Animation_2kryh"),
 "Disgusted": SubResource("Animation_a3pid"),
 "Happy": SubResource("Animation_v6hap"),
 "Love": SubResource("Animation_ojxq6"),
@@ -187,7 +205,6 @@ _data = {
 }
 
 [node name="Eyes" type="Sprite2D"]
-texture = ExtResource("11_s5uyp")
 script = ExtResource("2_dceme")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -203,4 +220,9 @@ collision_mask = 12
 wait_time = 3.0
 one_shot = true
 
+[node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 7.0
+autostart = true
+
 [connection signal="timeout" from="RayCastTimer" to="." method="_on_ray_cast_timer_timeout"]
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_wink_timer_timeout"]
