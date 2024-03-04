@@ -133,7 +133,7 @@ func _on_hitbox_body_entered(body):
 		var words:String = talkCalculator(body.status)
 		if (!words.is_empty()) :talk(words)
 	if ('Aggressiveness' in body.status):
-		if ((aggressiveness - (body.status['Aggressiveness'] + _perception)) > 0):
+		if ((body.status['Aggressiveness'] + _perception - aggressiveness) > 0):
 			setEmotion('Pain')
 		else:
 			setEmotion('Happy')
