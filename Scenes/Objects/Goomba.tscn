@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5dffrdlek8de"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/Goomba.gd" id="1_b2bc2"]
+[ext_resource type="Texture2D" uid="uid://d4kbe0v6ik3bl" path="res://Assets/Objects/Goomba.png" id="1_vkwdv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p432o"]
+atlas = ExtResource("1_vkwdv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bl43"]
+atlas = ExtResource("1_vkwdv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d82ic"]
+atlas = ExtResource("1_vkwdv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p68if"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p432o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bl43")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d82ic")
+}],
+"loop": false,
+"name": &"die",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmjw2"]
+size = Vector2(14, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jnpa2"]
+size = Vector2(16, 16)
+
+[node name="Goomba" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_b2bc2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p68if")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_mmjw2")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_jnpa2")
+debug_color = Color(0, 0.639216, 0.388235, 0.419608)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
