@@ -7,7 +7,7 @@ signal talkingSignal
 #region Status
 var _perception : int = 0
 var temperature : int = 0
-var aggressiveness : int = 0
+var aggressiveness : int = 1
 #endregion
 
 var _actualEmotion : String = 'default'
@@ -133,7 +133,10 @@ func _on_hitbox_body_entered(body):
 		var words:String = talkCalculator(body.status)
 		if (!words.is_empty()) :talk(words)
 	if ('Aggressiveness' in body.status):
-		if (body.status['Aggressiveness'] > 0): setEmotion('Pain')
+		if ((aggressiveness - (body.status['Aggressiveness'] + _perception)) > 0):
+			setEmotion('Pain')
+		else:
+			setEmotion('Happy')
 		var words:String = talkCalculator(body.status)
 		if (!words.is_empty()) :talk(words)
 	
