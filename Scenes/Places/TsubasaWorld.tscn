@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://m2x5uj8g5t3d"]
+[gd_scene load_steps=6 format=3 uid="uid://m2x5uj8g5t3d"]
 
 [ext_resource type="Texture2D" uid="uid://py1e56qilgu" path="res://Assets/Places/Tsubasa World.png" id="1_jgxny"]
 [ext_resource type="Script" path="res://Scripts/Places/TsubasaWorld.gd" id="1_npbbu"]
 [ext_resource type="PackedScene" uid="uid://b0klxkec7oo88" path="res://Scenes/Objects/Messi.tscn" id="2_e7p5k"]
+[ext_resource type="PackedScene" uid="uid://c7728ajj3r4tv" path="res://Scenes/Objects/Ronaldo.tscn" id="3_dpti0"]
 [ext_resource type="PackedScene" uid="uid://c3dmqtyel4dmq" path="res://Scenes/DudeGuy/DudeGuy.tscn" id="4_76aog"]
 
 [node name="TsubasaWorld" type="Node2D"]
@@ -11,6 +12,9 @@ script = ExtResource("1_npbbu")
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(128, 112)
 texture = ExtResource("1_jgxny")
+
+[node name="Ronaldo" parent="." instance=ExtResource("3_dpti0")]
+position = Vector2(35, 64)
 
 [node name="Messi" parent="." instance=ExtResource("2_e7p5k")]
 position = Vector2(122, 71)
@@ -34,5 +38,7 @@ one_shot = true
 [node name="DudeGuy" parent="." instance=ExtResource("4_76aog")]
 position = Vector2(85, 170)
 
+[connection signal="missesPlayer" from="Ronaldo" to="." method="_on_ronaldo_misses_player"]
+[connection signal="tacklingPlayer" from="Ronaldo" to="." method="_on_ronaldo_tackling_player"]
 [connection signal="timeout" from="LabelTimer" to="." method="_on_label_timer_timeout"]
 [connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]
