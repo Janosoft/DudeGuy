@@ -22,11 +22,18 @@ offset_right = 237.0
 offset_bottom = 180.0
 pivot_offset = Vector2(58, 17)
 theme_override_font_sizes/font_size = 10
+text = "asd"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 text_overrun_behavior = 3
 
+[node name="LabelTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="DudeGuy" parent="." instance=ExtResource("4_76aog")]
 position = Vector2(85, 170)
+
+[connection signal="timeout" from="LabelTimer" to="." method="_on_label_timer_timeout"]
+[connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]
