@@ -205,6 +205,7 @@ _data = {
 }
 
 [node name="Eyes" type="Sprite2D"]
+texture = ExtResource("2_8pilf")
 script = ExtResource("2_dceme")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
