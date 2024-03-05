@@ -44,12 +44,12 @@ func _on_wonder_pressed():
 #endregion
 
 func _on_unlock_achievement_pressed():
-	$UI/Label.visible = true
-	$UI/LabelTimer.start()
+	$UI/ControlSignals/Label.visible = true
+	$UI/ControlSignals/LabelTimer.start()
 	dude_guy.setEmotion("Happy")
 
 func _on_label_timer_timeout():
-	$UI/Label.visible = false
+	$UI/ControlSignals/Label.visible = false
 
 func _on_talk_button_pressed():
 	dude_guy.talk($UI/ControlVoice/TextEdit.text)
