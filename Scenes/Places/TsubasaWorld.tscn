@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://m2x5uj8g5t3d"]
+
+[ext_resource type="Script" path="res://Scripts/DudeGuy/DudeGuy.gd" id="1_ell2s"]
+[ext_resource type="Texture2D" uid="uid://py1e56qilgu" path="res://Assets/Places/Tsubasa World.png" id="1_jgxny"]
+[ext_resource type="PackedScene" uid="uid://b0klxkec7oo88" path="res://Scenes/Objects/Messi.tscn" id="2_e7p5k"]
+[ext_resource type="PackedScene" uid="uid://c3dmqtyel4dmq" path="res://Scenes/DudeGuy/DudeGuy.tscn" id="4_76aog"]
+
+[node name="TsubasaWorld" type="Node2D"]
+script = ExtResource("1_ell2s")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(128, 112)
+texture = ExtResource("1_jgxny")
+
+[node name="Messi" parent="." instance=ExtResource("2_e7p5k")]
+position = Vector2(122, 71)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 115.0
+offset_top = 143.0
+offset_right = 237.0
+offset_bottom = 180.0
+pivot_offset = Vector2(58, 17)
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="DudeGuy" parent="." instance=ExtResource("4_76aog")]
+position = Vector2(85, 170)
