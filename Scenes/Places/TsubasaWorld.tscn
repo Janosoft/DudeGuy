@@ -38,7 +38,21 @@ one_shot = true
 [node name="DudeGuy" parent="." instance=ExtResource("4_76aog")]
 position = Vector2(85, 170)
 
+[node name="GameLabel" type="Label" parent="."]
+offset_left = 12.0
+offset_top = 134.0
+offset_right = 60.0
+offset_bottom = 157.0
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
 [connection signal="missesPlayer" from="Ronaldo" to="." method="_on_ronaldo_misses_player"]
 [connection signal="tacklingPlayer" from="Ronaldo" to="." method="_on_ronaldo_tackling_player"]
 [connection signal="timeout" from="LabelTimer" to="." method="_on_label_timer_timeout"]
 [connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

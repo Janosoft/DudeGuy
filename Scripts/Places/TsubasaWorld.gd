@@ -1,5 +1,7 @@
 extends Node2D
 
+signal gameOver
+
 @onready var dude_guy = $DudeGuy
 @onready var messi = $Messi
 @onready var ronaldo = $Ronaldo
@@ -52,9 +54,10 @@ func _on_label_timer_timeout():
 func _on_ronaldo_tackling_player():
 	dude_guy.setEmotion('Scared')
 	dude_guy.talk('Ronaldo tries to tackle Messi')
-	
 
 func _on_ronaldo_misses_player():
 	dude_guy.setEmotion('Happy')
 	dude_guy.talk('but Messi manages to escape')
-	
+
+func _on_game_timer_timeout():
+	emit_signal("gameOver")
