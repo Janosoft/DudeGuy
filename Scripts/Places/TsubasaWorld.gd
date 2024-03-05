@@ -17,6 +17,7 @@ func _physics_process(delta):
 	messi.move_and_slide()
 
 func _ready():
+	await get_tree().create_timer(5).timeout
 	dude_guy.setEmotion('Love')
 	dude_guy.talk('Messi goes with the ball!!')
 	
