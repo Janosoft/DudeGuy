@@ -120,14 +120,15 @@ func talkCalculator(thingStatus: Dictionary)-> String :
 	return text[randi() % text.size()]
 
 func checkObject(thing: Object):
-	var newEmotion:String = emotionCalculator(thing.status)
-	var words:String = talkCalculator(thing.status)
-	setEmotion(newEmotion)
-	if (!words.is_empty() and newEmotion!='default') :talk(words)
+	if ('status' in thing):
+		var newEmotion:String = emotionCalculator(thing.status)
+		var words:String = talkCalculator(thing.status)
+		setEmotion(newEmotion)
+		if (!words.is_empty() and newEmotion!='default') :talk(words)
 
 #region Catch Signals#
 func _on_hitbox_body_entered(body):
-	print_debug("Trasspassing: " + body.name)
+	#print_debug("Trasspassing: " + body.name)
 	if ('Temperature' in body.status):
 		if (body.status['Temperature'] != 0): setTemperature(body.status['Temperature'])
 		var words:String = talkCalculator(body.status)
