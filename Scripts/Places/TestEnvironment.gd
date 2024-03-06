@@ -20,6 +20,7 @@ var dialogs : Dictionary = {
 	}
 
 func _ready():
+	dude_guy.dialogs= dialogs
 	dude_guy.setPerception(territoryType)
 	dude_guy.setTemperature(temperature)
 #region Emotion Buttons

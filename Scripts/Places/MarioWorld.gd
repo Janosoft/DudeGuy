@@ -21,6 +21,9 @@ var dialogs : Dictionary = {
 		1: ["Oh no, that's terrifying!", "Yikes, I'm scared!", "That's giving me the creeps","I'm getting goosebumps", "Oh wow, that's really freaking me out!"]},
 	}
 
+func _ready():
+	dude_guy.dialogs= dialogs
+
 func _physics_process(delta):
 	_apply_gravity(delta)
 	_controls()

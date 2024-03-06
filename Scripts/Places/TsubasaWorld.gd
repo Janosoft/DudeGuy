@@ -30,6 +30,9 @@ var dialogs : Dictionary = {
 		1: ["The ball is rolling forward.", "The ball is gliding across the field"]}
 	}
 
+func _ready():
+	dude_guy.dialogs= dialogs
+
 func _process(delta):
 	var time = game_timer.time_left
 	game_label.text = "%02d" % fmod(time,60)
@@ -39,11 +42,6 @@ func _physics_process(delta):
 	messi.move_and_slide()
 	ronaldo.move_and_slide()
 	if (ball.visible): ball.move_and_slide()
-
-func _ready():
-	await get_tree().create_timer(1).timeout
-	dude_guy.setEmotion('Love')
-	dude_guy.talk('Messi goes with the ball!!')
 	
 func _controls():
 #region Messi Controls
