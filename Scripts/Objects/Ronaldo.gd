@@ -5,7 +5,10 @@ signal missesPlayer
 signal hit
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var hit_timer = $HitTimer
-var isTackling = false
+
+#region Status
+var status = {'isTackling' : 0}
+#endregion
 
 #region PlayerSettings
 const SPEED = 5
@@ -14,7 +17,7 @@ const MAXSPEED = 15
 
 func _on_hitbox_body_entered(body):
 	#print_debug(body.name + ' entered')
-	isTackling = true
+	status['isTackling'] = 1
 	animated_sprite_2d.play("Tackle")
 	emit_signal('tacklingPlayer')
 	if (hit_timer.is_stopped()):
@@ -23,7 +26,7 @@ func _on_hitbox_body_entered(body):
 
 func _on_hitbox_body_exited(body):
 	#print_debug(body.name + ' exited')
-	isTackling = false
+	status['isTackling'] = 0
 	animated_sprite_2d.play("default")
 	emit_signal('missesPlayer')
 	if (!hit_timer.is_stopped()):
