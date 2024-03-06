@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var dude_guy = $DudeGuy
-@onready var text_box = $TextBox
+@onready var text_box = $CanvasLayer/TextBox
 
 #region PlayerSettings
 const SPEED = 10
@@ -33,11 +33,8 @@ func _controls():
 			lastDirection = direction
 			dude_guy.scale.x=-1
 		dude_guy.velocity.x =  max(dude_guy.velocity.x - SPEED, -MAXSPEED) * currentSpeed if direction<0 else min(dude_guy.velocity.x + SPEED, MAXSPEED) * currentSpeed
-		text_box.velocity.x =  max(text_box.velocity.x - SPEED, -MAXSPEED) * currentSpeed if direction<0 else min(text_box.velocity.x + SPEED, MAXSPEED) * currentSpeed
 	else:
 		dude_guy.velocity.x = lerp(dude_guy.velocity.x,0.0,0.2)
-		text_box.velocity.x = lerp(text_box.velocity.x,0.0,0.2)
-		
 	
 func _on_brick_boring_achievement():
 	dude_guy.setEmotion("Sad")

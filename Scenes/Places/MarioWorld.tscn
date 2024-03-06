@@ -373,14 +373,16 @@ position = Vector2(280, 104)
 [node name="DudeGuy" parent="." instance=ExtResource("1_28rhf")]
 position = Vector2(25, 53)
 
-[node name="TextBox" parent="." instance=ExtResource("5_2i6pg")]
-position = Vector2(25, 7)
-
 [node name="Goomba" parent="." instance=ExtResource("6_eo0gj")]
 position = Vector2(554, 184)
 
 [node name="FurryMonster" parent="." instance=ExtResource("7_tdmu6")]
 position = Vector2(918, 152)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextBox" parent="CanvasLayer" instance=ExtResource("5_2i6pg")]
+position = Vector2(128, 7)
 
 [connection signal="boringAchievement" from="Brick" to="." method="_on_brick_boring_achievement"]
 [connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]
