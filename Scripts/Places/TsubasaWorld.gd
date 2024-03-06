@@ -7,6 +7,9 @@ signal gameOver
 @onready var ronaldo = $Ronaldo
 @onready var label = $Label
 @onready var label_timer = $LabelTimer
+@onready var game_label = $GameLabel
+@onready var game_timer = $GameTimer
+
 
 #region PlayerSettings
 const SPEED = 10
@@ -14,6 +17,11 @@ const MAXSPEED = 125
 var direction = 1
 var currentSpeed = 1
 #endregion
+
+func _process(delta):
+	var time = game_timer.time_left
+	game_label.text = "%02d" % fmod(time,60)
+	
 
 func _physics_process(delta):
 	_controls()
@@ -60,4 +68,7 @@ func _on_ronaldo_misses_player():
 	dude_guy.talk('but Messi manages to escape')
 
 func _on_game_timer_timeout():
+	print_debug('Game Over')
+	set_process(false)
+	set_physics_process(false)
 	emit_signal("gameOver")
