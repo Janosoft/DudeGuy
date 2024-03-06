@@ -48,6 +48,7 @@ func _getVocals(words: String) -> String:
 	return response
 
 func articulate(words: String) -> void:
+	if (_animationPlayer.is_playing()): _animationPlayer.clear_queue() #Prevents words from accumulating
 	var vocals: String = _getVocals(words)
 	const ACCEPT: String = "AEIOU"
 	
