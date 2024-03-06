@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6ny7bto8n3oe"]
+[gd_scene load_steps=9 format=3 uid="uid://b6ny7bto8n3oe"]
 
 [ext_resource type="PackedScene" uid="uid://c3dmqtyel4dmq" path="res://Scenes/DudeGuy/DudeGuy.tscn" id="1_28rhf"]
 [ext_resource type="Script" path="res://Scripts/Places/MarioWorld.gd" id="1_j5ggm"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dt8h2m8e6j71a" path="res://Scenes/Objects/Brick.tscn" id="2_17rac"]
 [ext_resource type="PackedScene" uid="uid://b7icaeuogcqr8" path="res://Scenes/Objects/TextBox.tscn" id="5_2i6pg"]
 [ext_resource type="PackedScene" uid="uid://b5dffrdlek8de" path="res://Scenes/Objects/Goomba.tscn" id="6_eo0gj"]
-[ext_resource type="PackedScene" uid="uid://cdb013v0a6rnx" path="res://Scenes/Objects/FurryMonster.tscn" id="7_tdmu6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r8vap"]
 texture = ExtResource("2_8awx0")
@@ -375,9 +374,6 @@ position = Vector2(25, 53)
 
 [node name="Goomba" parent="." instance=ExtResource("6_eo0gj")]
 position = Vector2(554, 184)
-
-[node name="FurryMonster" parent="." instance=ExtResource("7_tdmu6")]
-position = Vector2(918, 152)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
