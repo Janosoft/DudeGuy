@@ -42,7 +42,7 @@ func _aim():
 	_rayCast.target_position.y+= _rayCastOperatorY
 
 func _checkObjectCollision():
-	if (_rayCast.is_colliding() and _lastObjectSeen != _rayCast.get_collider()):
+	if (_rayCast.is_colliding() and _lastObjectSeen != _rayCast.get_collider() and _rayCast.get_collider().visible):
 		#print_debug('I see ' + _rayCast.get_collider().name)
 		_rayCast.enabled = false
 		$RayCastTimer.start()

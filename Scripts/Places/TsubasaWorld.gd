@@ -68,12 +68,14 @@ func _on_label_timer_timeout():
 	label.text = ''
 
 func _on_ronaldo_tackling_player():
-	dude_guy.setEmotion('Scared')
-	dude_guy.talk('Ronaldo tries to tackle Messi')
+	#dude_guy.setEmotion('Scared')
+	#dude_guy.talk('Ronaldo tries to tackle Messi')
+	pass
 
 func _on_ronaldo_misses_player():
-	dude_guy.setEmotion('Happy')
-	dude_guy.talk('but Messi manages to escape')
+	#dude_guy.setEmotion('Happy')
+	#dude_guy.talk('but Messi manages to escape')
+	pass
 
 func _on_game_timer_timeout():
 	print_debug('Game Over')
@@ -82,13 +84,15 @@ func _on_game_timer_timeout():
 	emit_signal("gameOver")
 
 func _on_ronaldo_hit():
-	messi.hit()
-	ball.position.x = messi.ball.position.x + messi.position.x
-	ball.visible= true
-	dude_guy.setEmotion('Sad')
-	dude_guy.talk('Messi loses the ball')
+	#messi.hit()
+	#ball.position.x = messi.ball.position.x + messi.position.x
+	#ball.visible= true
+	#dude_guy.setEmotion('Sad')
+	#dude_guy.talk('Messi loses the ball')
+	pass
 
 func _on_messi_got_ball():
-	ball.visible= false
-	dude_guy.setEmotion('Love')
-	dude_guy.talk('Messi recovered the ball')
+	#ball.visible= false
+	#dude_guy.setEmotion('Love')
+	#dude_guy.talk('Messi recovered the ball')
+	pass

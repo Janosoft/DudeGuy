@@ -122,6 +122,7 @@ func talkCalculator(thingStatus: Dictionary)-> String :
 	return text[randi() % text.size()]
 
 func checkObject(thing: Object):
+	print_debug(thing.name)
 	if ('status' in thing):
 		var newEmotion:String = emotionCalculator(thing.status)
 		var words:String = talkCalculator(thing.status)
