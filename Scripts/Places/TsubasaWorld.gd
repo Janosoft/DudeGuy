@@ -10,6 +10,7 @@ signal gameOver
 @onready var label_timer = $UI/LabelTimer
 @onready var game_label = $UI/GameLabel
 @onready var game_timer = $UI/GameTimer
+@onready var screensize = get_viewport_rect().size
 
 
 #region PlayerSettings
@@ -39,8 +40,10 @@ func _controls():
 	direction = Input.get_axis("move_left", "move_right")
 	if direction:
 		messi.velocity.x =  max(messi.velocity.x - SPEED, -MAXSPEED) * currentSpeed if direction<0 else min(messi.velocity.x + SPEED, MAXSPEED) * currentSpeed
+		messi.position.x = clamp(messi.position.x,32,screensize.x - 32) #Limit movements within the screen
 	else:
 		messi.velocity.x = lerp(messi.velocity.x,0.0,0.2)
+		messi.position.x = clamp(messi.position.x,32,screensize.x - 32) #Limit movements within the screen
 #endregion
 #region Ronaldo Controls
 	if (ronaldo.isTackling):
@@ -83,7 +86,7 @@ func _on_ronaldo_hit():
 	ball.position.x = messi.ball.position.x + messi.position.x
 	ball.visible= true
 	dude_guy.setEmotion('Sad')
-	dude_guy.talk('Messi lost the ball')
+	dude_guy.talk('Messi loses the ball')
 
 func _on_messi_got_ball():
 	ball.visible= false
