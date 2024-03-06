@@ -5,10 +5,11 @@ signal gameOver
 @onready var dude_guy = $DudeGuy
 @onready var messi = $Messi
 @onready var ronaldo = $Ronaldo
-@onready var label = $Label
-@onready var label_timer = $LabelTimer
-@onready var game_label = $GameLabel
-@onready var game_timer = $GameTimer
+@onready var ball = $Ball
+@onready var label = $UI/Label
+@onready var label_timer = $UI/LabelTimer
+@onready var game_label = $UI/GameLabel
+@onready var game_timer = $UI/GameTimer
 
 
 #region PlayerSettings
@@ -21,12 +22,12 @@ var currentSpeed = 1
 func _process(delta):
 	var time = game_timer.time_left
 	game_label.text = "%02d" % fmod(time,60)
-	
 
 func _physics_process(delta):
 	_controls()
 	messi.move_and_slide()
 	ronaldo.move_and_slide()
+	if (ball.visible): ball.move_and_slide()
 
 func _ready():
 	await get_tree().create_timer(1).timeout
@@ -50,6 +51,10 @@ func _controls():
 		else:
 			ronaldo.velocity.x = max(ronaldo.velocity.x - ronaldo.SPEED, -ronaldo.MAXSPEED)
 #endregion
+#region Ball Controls
+	if (ball.visible):
+		ball.velocity.x = min(ball.velocity.x + ball.SPEED, ball.MAXSPEED)
+#endregion
 
 func _on_dude_guy_talking_signal(text):
 	label.text = text
@@ -72,3 +77,15 @@ func _on_game_timer_timeout():
 	set_process(false)
 	set_physics_process(false)
 	emit_signal("gameOver")
+
+func _on_ronaldo_hit():
+	messi.hit()
+	ball.position.x = messi.ball.position.x + messi.position.x
+	ball.visible= true
+	dude_guy.setEmotion('Sad')
+	dude_guy.talk('Messi lost the ball')
+
+func _on_messi_got_ball():
+	ball.visible= false
+	dude_guy.setEmotion('Love')
+	dude_guy.talk('Messi recovered the ball')

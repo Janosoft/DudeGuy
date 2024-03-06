@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://m2x5uj8g5t3d"]
+[gd_scene load_steps=7 format=3 uid="uid://m2x5uj8g5t3d"]
 
 [ext_resource type="Texture2D" uid="uid://py1e56qilgu" path="res://Assets/Places/Tsubasa World.png" id="1_jgxny"]
 [ext_resource type="Script" path="res://Scripts/Places/TsubasaWorld.gd" id="1_npbbu"]
 [ext_resource type="PackedScene" uid="uid://b0klxkec7oo88" path="res://Scenes/Objects/Messi.tscn" id="2_e7p5k"]
 [ext_resource type="PackedScene" uid="uid://c7728ajj3r4tv" path="res://Scenes/Objects/Ronaldo.tscn" id="3_dpti0"]
 [ext_resource type="PackedScene" uid="uid://c3dmqtyel4dmq" path="res://Scenes/DudeGuy/DudeGuy.tscn" id="4_76aog"]
+[ext_resource type="PackedScene" uid="uid://n85dtuwiovj4" path="res://Scenes/Objects/Ball.tscn" id="6_w0peo"]
 
 [node name="TsubasaWorld" type="Node2D"]
 script = ExtResource("1_npbbu")
@@ -14,12 +15,22 @@ position = Vector2(128, 112)
 texture = ExtResource("1_jgxny")
 
 [node name="Ronaldo" parent="." instance=ExtResource("3_dpti0")]
-position = Vector2(35, 64)
+position = Vector2(-50, 64)
 
 [node name="Messi" parent="." instance=ExtResource("2_e7p5k")]
 position = Vector2(122, 71)
 
-[node name="Label" type="Label" parent="."]
+[node name="DudeGuy" parent="." instance=ExtResource("4_76aog")]
+position = Vector2(85, 170)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
 offset_left = 115.0
 offset_top = 143.0
 offset_right = 237.0
@@ -32,27 +43,29 @@ autowrap_mode = 2
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="LabelTimer" type="Timer" parent="."]
+[node name="LabelTimer" type="Timer" parent="UI"]
 one_shot = true
 
-[node name="DudeGuy" parent="." instance=ExtResource("4_76aog")]
-position = Vector2(85, 170)
-
-[node name="GameLabel" type="Label" parent="."]
+[node name="GameLabel" type="Label" parent="UI"]
+layout_mode = 0
 offset_left = 12.0
 offset_top = 134.0
 offset_right = 60.0
 offset_bottom = 157.0
-text = "20"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameTimer" type="Timer" parent="."]
-wait_time = 20.0
+[node name="GameTimer" type="Timer" parent="UI"]
+wait_time = 30.0
 autostart = true
 
+[node name="Ball" parent="." instance=ExtResource("6_w0peo")]
+position = Vector2(166, 96)
+
+[connection signal="hit" from="Ronaldo" to="." method="_on_ronaldo_hit"]
 [connection signal="missesPlayer" from="Ronaldo" to="." method="_on_ronaldo_misses_player"]
 [connection signal="tacklingPlayer" from="Ronaldo" to="." method="_on_ronaldo_tackling_player"]
-[connection signal="timeout" from="LabelTimer" to="." method="_on_label_timer_timeout"]
+[connection signal="got_ball" from="Messi" to="." method="_on_messi_got_ball"]
 [connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]
-[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="timeout" from="UI/LabelTimer" to="." method="_on_label_timer_timeout"]
+[connection signal="timeout" from="UI/GameTimer" to="." method="_on_game_timer_timeout"]
