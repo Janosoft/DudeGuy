@@ -1,20 +1,37 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0klxkec7oo88"]
+[gd_scene load_steps=14 format=3 uid="uid://b0klxkec7oo88"]
 
 [ext_resource type="Texture2D" uid="uid://cugm6hy7r71ab" path="res://Assets/Objects/Messi.png" id="1_q3y6y"]
+[ext_resource type="Script" path="res://Scripts/Objects/Messi.gd" id="1_udkuy"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1uuis"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhgl2"]
+atlas = ExtResource("1_q3y6y")
+region = Rect2(0, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsdf3"]
+atlas = ExtResource("1_q3y6y")
+region = Rect2(64, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_im00p"]
+atlas = ExtResource("1_q3y6y")
+region = Rect2(128, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lk0t6"]
+atlas = ExtResource("1_q3y6y")
+region = Rect2(192, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyeot"]
 atlas = ExtResource("1_q3y6y")
 region = Rect2(0, 0, 64, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a0l3q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_te1pe"]
 atlas = ExtResource("1_q3y6y")
 region = Rect2(64, 0, 64, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ovshf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqnft"]
 atlas = ExtResource("1_q3y6y")
 region = Rect2(128, 0, 64, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sxen5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_68veu"]
 atlas = ExtResource("1_q3y6y")
 region = Rect2(192, 0, 64, 96)
 
@@ -22,16 +39,33 @@ region = Rect2(192, 0, 64, 96)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1uuis")
+"texture": SubResource("AtlasTexture_dhgl2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a0l3q")
+"texture": SubResource("AtlasTexture_hsdf3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ovshf")
+"texture": SubResource("AtlasTexture_im00p")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sxen5")
+"texture": SubResource("AtlasTexture_lk0t6")
+}],
+"loop": true,
+"name": &"Noball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyeot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_te1pe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqnft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68veu")
 }],
 "loop": true,
 "name": &"default",
@@ -39,18 +73,38 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wa2y"]
-size = Vector2(40, 52)
+size = Vector2(32, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jy5ux"]
+size = Vector2(15, 16)
 
 [node name="Messi" type="CharacterBody2D"]
 collision_layer = 16
 collision_mask = 0
+script = ExtResource("1_udkuy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2e1ua")
 autoplay = "default"
-frame = 1
-frame_progress = 0.378128
+frame = 3
+frame_progress = 0.0777054
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 16)
+position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_1wa2y")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(22.5, 33)
+shape = SubResource("RectangleShape2D_jy5ux")
+debug_color = Color(0, 0.635294, 0.415686, 0.419608)
+
+[node name="HitboxTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="HitboxTimer" to="." method="_on_hitbox_timer_timeout"]
