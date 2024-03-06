@@ -13,6 +13,14 @@ var lastDirection = 1
 var currentSpeed = 1
 #endregion
 
+var dialogs : Dictionary = {
+	"Striking": {
+		1: ["Whoa, check that out, that's weird", "Wow, look over there, that's odd", "Take a look at that, it's pretty strange", "Oh my, what's that? That's unusual", "What's that? That's rather peculiar"]},
+	"Aggressiveness":{
+		0: ["Aww, that's so sweet!", "How adorable!", "Oh, that's just too cute","Look at that, it's heartwarming", "That's so precious!"],
+		1: ["Oh no, that's terrifying!", "Yikes, I'm scared!", "That's giving me the creeps","I'm getting goosebumps", "Oh wow, that's really freaking me out!"]},
+	}
+
 func _physics_process(delta):
 	_apply_gravity(delta)
 	_controls()

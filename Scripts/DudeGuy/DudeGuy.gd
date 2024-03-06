@@ -4,6 +4,7 @@ signal talkingSignal
 @onready var _body = $Body
 @onready var emotion_timer = $EmotionTimer
 
+var dialogs : Dictionary = {}
 #region Status
 var _perception : int = 0
 var temperature : int = 0

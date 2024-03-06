@@ -12,13 +12,23 @@ signal gameOver
 @onready var game_timer = $UI/GameTimer
 @onready var screensize = get_viewport_rect().size
 
-
 #region PlayerSettings
 const SPEED = 10
 const MAXSPEED = 125
 var direction = 1
 var currentSpeed = 1
 #endregion
+
+var dialogs : Dictionary = {
+	"WithBall": {
+		0: ["Messi loses the ball", "Messi no longer has the ball"],
+		1: ["Messi goes with the ball", "Messi runs with the ball"]},
+	"isTackling":{
+		0: ["Ronaldo runs to try to catch him", "Ronaldo is chasing him down", "Ronaldo is running fast in an attempt to catch him"],
+		1: ["Ronaldo presses forward to steal the ball", "Ronaldo makes a move to intercept the ball"]},
+	"isRolling":{
+		1: ["The ball is rolling forward.", "The ball is gliding across the field"]}
+	}
 
 func _process(delta):
 	var time = game_timer.time_left
@@ -46,7 +56,7 @@ func _controls():
 		messi.position.x = clamp(messi.position.x,32,screensize.x - 32) #Limit movements within the screen
 #endregion
 #region Ronaldo Controls
-	if (ronaldo.isTackling):
+	if (ronaldo.status['isTackling']):
 		ronaldo.velocity.x = lerp(ronaldo.velocity.x,0.0,0.01)
 	else:
 		if ((messi.position.x - ronaldo.position.x)>0):
@@ -57,6 +67,7 @@ func _controls():
 #region Ball Controls
 	if (ball.visible):
 		ball.velocity.x = min(ball.velocity.x + ball.SPEED, ball.MAXSPEED)
+		ball.position.x = clamp(ball.position.x,16,screensize.x - 16) #Limit movements within the screen
 #endregion
 
 func _on_dude_guy_talking_signal(text):
@@ -84,15 +95,15 @@ func _on_game_timer_timeout():
 	emit_signal("gameOver")
 
 func _on_ronaldo_hit():
-	#messi.hit()
-	#ball.position.x = messi.ball.position.x + messi.position.x
-	#ball.visible= true
+	messi.hit()
+	ball.position.x = messi.ball.position.x + messi.position.x
+	ball.visible= true
 	#dude_guy.setEmotion('Sad')
 	#dude_guy.talk('Messi loses the ball')
 	pass
 
 func _on_messi_got_ball():
-	#ball.visible= false
+	ball.visible= false
 	#dude_guy.setEmotion('Love')
 	#dude_guy.talk('Messi recovered the ball')
 	pass

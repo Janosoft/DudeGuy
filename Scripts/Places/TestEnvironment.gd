@@ -8,6 +8,17 @@ const territoryTypes = {'FRIENDLY': -1, 'NEUTRAL': 0, 'HOSTILE': 1}
 var territoryType = territoryTypes.get('NEUTRAL')
 var temperature = 0
 
+var dialogs : Dictionary = {
+	"Striking": {
+		1: ["Whoa, check that out, that's weird", "Wow, look over there, that's odd", "Take a look at that, it's pretty strange", "Oh my, what's that? That's unusual", "What's that? That's rather peculiar"]},
+	"Aggressiveness":{
+		0: ["Aww, that's so sweet!", "How adorable!", "Oh, that's just too cute","Look at that, it's heartwarming", "That's so precious!"],
+		1: ["Oh no, that's terrifying!", "Yikes, I'm scared!", "That's giving me the creeps","I'm getting goosebumps", "Oh wow, that's really freaking me out!"]},
+	"Temperature":{
+		0: ["Ah, feels nice and warm over here", "It's cozy by this warmth", "Mmm, I can feel the heat, it's so comforting", "This warmth is just what I needed", "Oh, it's toasty around here, I love it"],
+		1: ["Brr, it's chilly around here", "Feels cold over here, but refreshing", "I can feel the coolness, it's quite invigorating", "This cold is bracing, but in a good way", "It's icy around here, but I don't mind"]}
+	}
+
 func _ready():
 	dude_guy.setPerception(territoryType)
 	dude_guy.setTemperature(temperature)
