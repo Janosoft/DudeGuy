@@ -215,7 +215,7 @@ libraries = {
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(100, 0)
-collision_mask = 12
+collision_mask = 28
 
 [node name="RayCastTimer" type="Timer" parent="."]
 wait_time = 3.0

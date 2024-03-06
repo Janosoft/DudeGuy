@@ -58,6 +58,7 @@ duck={
 2d_physics/layer_2="DudeGuy"
 2d_physics/layer_3="Objects"
 2d_physics/layer_4="Enemies"
+2d_physics/layer_5="Other Players"
 
 [rendering]
 
