@@ -56,6 +56,8 @@ func emotionCalculator(thingStatus: Dictionary)-> String :
 		'Aggressiveness':
 			if (aggressiveness - (maxValue + _perception) < 0):
 				emotion = 'Scared'
+			else:
+				emotion = 'Happy'
 		_:
 			emotion = 'default'
 	
