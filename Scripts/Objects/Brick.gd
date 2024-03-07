@@ -1,18 +1,21 @@
 extends StaticBody2D
 
+#region Public Variables
 signal boringAchievement
-@onready var animatedSprite = $AnimatedSprite2D
-#region Status
-var status = {'Striking': 3}
+var status = {'Striking': 1}
 #endregion
-var timesHit = 0
+
+#region Privated Variables
+@onready var _animatedSprite = $AnimatedSprite2D
+var _timesHit = 0
+#endregion
 
 func hit():
-	timesHit += 1
-	animatedSprite.play()
-	if (timesHit > 3):
+	_timesHit += 1
+	_animatedSprite.play()
+	if (_timesHit > 3):
 		emit_signal("boringAchievement")
-		timesHit = 0
+		_timesHit = 0
 
 func _on_hit_box_body_entered(body):
 	if (body.name == 'DudeGuy'): hit()

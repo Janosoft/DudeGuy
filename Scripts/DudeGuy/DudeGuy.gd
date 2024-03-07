@@ -1,39 +1,40 @@
 extends CharacterBody2D
 
+#region Public Variables
 signal talkingSignal
-@onready var _body = $Body
-@onready var emotion_timer = $EmotionTimer
-
 var dialogs : Dictionary = {}
-#region Status
-var temperature : int = 0
 #endregion
 
+#region Privated Variables
+@onready var _body = $Body
+@onready var _emotion_timer = $EmotionTimer
+var _temperature : int = 0
+var _lastTemperature : int = 0
 var _actualEmotion : String = 'default'
 var _lastEmotion : String = 'default'
-var _lastTemperature : int = 0
+#endregion
 
 func _ready():
 	setEmotion(_actualEmotion)
 	
 func talk(words: String):
 	emit_signal('talkingSignal', words)
-	if (!emotion_timer.is_stopped()):
-		emotion_timer.stop()
-		emotion_timer.wait_time = len(words) * 0.17
-		emotion_timer.start()
+	if (!_emotion_timer.is_stopped()):
+		_emotion_timer.stop()
+		_emotion_timer.wait_time = len(words) * 0.17
+		_emotion_timer.start()
 	_body.talk(words)
 
 func setEmotion(newEmotion: String):
 	_lastEmotion = _actualEmotion
 	_body.setEmotion(newEmotion)
 	if (newEmotion != 'default'):
-		emotion_timer.start()
+		_emotion_timer.start()
 
 func setTemperature(newTemperature: int):
-	_lastTemperature= temperature
-	temperature= newTemperature
-	_body.setTemperature(temperature)
+	_lastTemperature= _temperature
+	_temperature= newTemperature
+	_body.setTemperature(_temperature)
 
 func emotionCalculator(thingStatus: Dictionary)-> String :
 	var maxStatus = ''
@@ -117,7 +118,7 @@ func talkCalculator(thingStatus: Dictionary)-> String :
 	return text[randi() % text.size()]
 
 func checkObject(thing: Object):
-	print_debug(thing.name)
+	#print_debug(thing.name)
 	if ('status' in thing):
 		var newEmotion:String = emotionCalculator(thing.status)
 		var words:String = talkCalculator(thing.status)
@@ -145,7 +146,8 @@ func _on_hitbox_body_exited(body):
 		if (body.temperature != 0): setTemperature(_lastTemperature)
 	if ('aggressiveness' in body):
 		if (body.aggressiveness > 0): setEmotion(_lastEmotion)
-#endregion
 
 func _on_emotion_timer_timeout():
 	setEmotion('default')
+
+#endregion

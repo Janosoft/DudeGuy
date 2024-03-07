@@ -1,15 +1,16 @@
 extends CharacterBody2D
 
-#region Status
-var status = {'Aggressiveness' : 1}
+#region Public Variables
+var status = {'Aggressiveness' : 0}
 #endregion
 
+#region Privated Variables
+@onready var _animatedSprite = $AnimatedSprite2D
 const _SPEED = 250
 var _direction = -1
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _dying = false
-
-@onready var _animatedSprite = $AnimatedSprite2D
+#endregion
 
 func _physics_process(delta):
 	_apply_gravity(delta)

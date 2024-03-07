@@ -1,17 +1,16 @@
 extends Sprite2D
 
+#region Privated Variables
 @onready var _animationPlayer= $AnimationPlayer
+var _dudeNode : Node2D
+var _actualEmotion = 'default'
 
-#region Vision
 @onready var _rayCast = $RayCast2D
 var _rayCastOperatorX = 25
 var _rayCastOperatorY = -15
 const _rayCastSize = 150
 var _lastObjectSeen: Object = null
 #endregion
-
-var _dudeNode : Node2D
-var _actualEmotion = 'default'
 
 func _ready():
 	_animationPlayer.current_animation = "default"
@@ -51,7 +50,6 @@ func _checkObjectCollision():
 
 func _on_ray_cast_timer_timeout():
 	_rayCast.enabled = true
-
 
 func _on_wink_timer_timeout():
 	$BlinkTimer.wait_time = randi() % (10 - 7 + 1) + 7 #Random between 7 - 10 secs

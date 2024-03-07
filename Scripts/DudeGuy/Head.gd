@@ -1,20 +1,18 @@
 extends Sprite2D
 
+#region Privated Variables
 @onready var _animationPlayer= $AnimationPlayer
 @onready var _eyebrows = $Eyebrows
 @onready var _eyes = $Eyes
 @onready var _mouth = $Mouth
-
-#region Status
 var _temperature : int = 0
-#endregion
-
 const _temperatureAnimation = { -5: 'Cold', -4: 'Cold', -3: 'Cold',
 								-2: 'HalfCold', -1: 'HalfCold',
 								 0: 'default',
 								 1: 'Blushed', 2: 'Blushed',
 								 3: 'Hot', 4: 'Hot', 5: 'Hot'}
 const _emotionTemperature = {'Scared': -2, 'default': 0, 'Amazed': 2, 'Angry': 5}
+#endregion
 
 func _ready():
 	_animationPlayer.current_animation = _temperatureAnimation.get(_temperature)

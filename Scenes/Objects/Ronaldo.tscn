@@ -82,7 +82,7 @@ shape = SubResource("RectangleShape2D_iht81")
 debug_color = Color(0, 0.639216, 0.34902, 0.419608)
 
 [node name="HitTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

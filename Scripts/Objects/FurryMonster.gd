@@ -1,11 +1,13 @@
 extends CharacterBody2D
 
-#region Status
+#region Public Variables
 var status = {'Aggressiveness' : 5}
 #endregion
 
-const SPEED = -300.0
+#region Privated Variables
+const _SPEED = -300.0
+#endregion
 
 func _physics_process(delta):
-	velocity.x = SPEED * delta
+	velocity.x = _SPEED * delta
 	move_and_slide()

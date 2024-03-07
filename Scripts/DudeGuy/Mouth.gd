@@ -1,8 +1,9 @@
 extends Sprite2D
 
+#region Privated Variables
 @onready var _animationPlayer= $AnimationPlayer
-
 var _actualEmotion = 'default'
+#endregion
 
 func _ready():
 	_animationPlayer.current_animation = "default"

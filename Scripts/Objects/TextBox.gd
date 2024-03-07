@@ -1,12 +1,15 @@
 extends CharacterBody2D
-@onready var label = $Label
-@onready var timer = $Timer
+
+#region Privated Variables
+@onready var _label = $Label
+@onready var _timer = $Timer
+#endregion
 
 func setText(newText:String):
-	label.text = newText
-	timer.wait_time = len(newText) * 0.17
+	_label.text = newText
+	_timer.wait_time = len(newText) * 0.17
 	visible = true
-	timer.start()
+	_timer.start()
 	
 func _on_timer_timeout():
 	visible= false;

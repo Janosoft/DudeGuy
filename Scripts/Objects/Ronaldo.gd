@@ -1,37 +1,50 @@
 extends CharacterBody2D
 
+#region Public Variables
 signal tacklingPlayer
 signal missesPlayer
 signal hit
-@onready var animated_sprite_2d = $AnimatedSprite2D
-@onready var hit_timer = $HitTimer
-
-#region Status
 var status = {'isTackling' : 0}
+var direction = 1
 #endregion
 
-#region PlayerSettings
-const SPEED = 5
-const MAXSPEED = 15
+#region Privated Variables
+@onready var _animated_sprite_2d = $AnimatedSprite2D
+@onready var _hit_timer = $HitTimer
+const _SPEED = 5
+const _MAXSPEED = 15
 #endregion
+
+func _physics_process(delta):
+	_move(delta)
+	move_and_slide()
+
+func _move(delta):
+	if (status['isTackling']):
+		velocity.x = lerp(velocity.x,0.0,0.01)
+	else:
+		if (direction>0):
+			velocity.x = min(velocity.x + _SPEED, _MAXSPEED)
+		else:
+			velocity.x = max(velocity.x - _SPEED, -_MAXSPEED)
 
 func _on_hitbox_body_entered(body):
 	#print_debug(body.name + ' entered')
 	status['isTackling'] = 1
-	animated_sprite_2d.play("Tackle")
+	_animated_sprite_2d.play("Tackle")
 	emit_signal('tacklingPlayer')
-	if (hit_timer.is_stopped()):
+	if (_hit_timer.is_stopped()):
 		#print_debug('tacklingPlayer start')
-		hit_timer.start()
+		_hit_timer.start()
 
 func _on_hitbox_body_exited(body):
 	#print_debug(body.name + ' exited')
 	status['isTackling'] = 0
-	animated_sprite_2d.play("default")
+	_animated_sprite_2d.play("default")
 	emit_signal('missesPlayer')
-	if (!hit_timer.is_stopped()):
+	if (!_hit_timer.is_stopped()):
 		#print_debug('tacklingPlayer stop')
-		hit_timer.stop()
+		_hit_timer.stop()
 
 func _on_hit_timer_timeout():
 	#print_debug('Ronaldo hit')

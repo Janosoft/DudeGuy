@@ -1,8 +1,7 @@
 extends Sprite2D
 
+#region Privated Variables
 @onready var _head = $Head
-
-#region Status
 var _temperature : int = 0
 #endregion
 
