@@ -62,60 +62,15 @@ func emotionCalculator(thingStatus: Dictionary)-> String :
 func talkCalculator(thingStatus: Dictionary)-> String :
 	var maxStatus = ''
 	var maxValue = -5
-	var text= ''
 	
 	for key in thingStatus.keys():
 		if (thingStatus[key] > maxValue):
 			maxStatus = key
 			maxValue = thingStatus[key]
 	
-	match maxStatus:
-		'Striking':
-			text = ["Whoa, check that out, that's weird",
-					"Wow, look over there, that's odd",
-					"Take a look at that, it's pretty strange",
-					"Oh my, what's that? That's unusual",
-					"What's that? That's rather peculiar"
-					]
-		'Aggressiveness':
-			if (maxValue > 0): #SCARY
-				text = ["Oh no, that's terrifying!",
-						"Yikes, I'm scared!",
-						"That's giving me the creeps",
-						"I'm getting goosebumps",
-						"Oh wow, that's really freaking me out!"
-						]
-			else: #FRIENDLY
-				text = ["Aww, that's so sweet!",
-						"How adorable!",
-						"Oh, that's just too cute",
-						"Look at that, it's heartwarming",
-						"That's so precious!"
-						]
-		'Temperature':
-			if (maxValue>0): #WARM
-				text = ["Ah, feels nice and warm over here",
-						"It's cozy by this warmth",
-						"Mmm, I can feel the heat, it's so comforting",
-						"This warmth is just what I needed",
-						"Oh, it's toasty around here, I love it"
-						]
-			else: #COLD
-				text = ["Brr, it's chilly around here",
-						"Feels cold over here, but refreshing",
-						"I can feel the coolness, it's quite invigorating",
-						"This cold is bracing, but in a good way",
-						"It's icy around here, but I don't mind"
-						]
-		_:
-			text = ["Everything seems calm",
-					"It looks like everything's quiet",
-					"Looks like it's all peaceful",
-					"Seems like there's nothing happening",
-					"No excitement here, just a quiet moment"
-					]
-	
-	return text[randi() % text.size()]
+	#int(maxValue>0) allows to get more than an atribute and get 0 or 1 in the dialogs
+	#randi() % dialogs[maxStatus][int(maxValue>0)].size() takes an random text
+	return dialogs[maxStatus][int(maxValue>0)][randi() % dialogs[maxStatus][int(maxValue>0)].size()]
 
 func checkObject(thing: Object):
 	#print_debug(thing.name)
