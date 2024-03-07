@@ -6,9 +6,7 @@ signal talkingSignal
 
 var dialogs : Dictionary = {}
 #region Status
-var _perception : int = 0
 var temperature : int = 0
-var aggressiveness : int = 1
 #endregion
 
 var _actualEmotion : String = 'default'
@@ -37,10 +35,6 @@ func setTemperature(newTemperature: int):
 	temperature= newTemperature
 	_body.setTemperature(temperature)
 
-func setPerception(newPerception: int):
-	#It's diferent interact to something in a hostile place than a friendly one
-	_perception= newPerception
-
 func emotionCalculator(thingStatus: Dictionary)-> String :
 	var maxStatus = ''
 	var maxValue = -5
@@ -55,7 +49,7 @@ func emotionCalculator(thingStatus: Dictionary)-> String :
 		'Striking':
 			emotion = "Wonder"
 		'Aggressiveness':
-			if (aggressiveness - (maxValue + _perception) < 0):
+			if (maxValue > 0):
 				emotion = 'Scared'
 			else:
 				emotion = 'Happy'
@@ -83,7 +77,7 @@ func talkCalculator(thingStatus: Dictionary)-> String :
 					"What's that? That's rather peculiar"
 					]
 		'Aggressiveness':
-			if (aggressiveness - (maxValue + _perception) < 0): #SCARY
+			if (maxValue > 0): #SCARY
 				text = ["Oh no, that's terrifying!",
 						"Yikes, I'm scared!",
 						"That's giving me the creeps",
@@ -138,7 +132,7 @@ func _on_hitbox_body_entered(body):
 		var words:String = talkCalculator(body.status)
 		if (!words.is_empty()) :talk(words)
 	if ('Aggressiveness' in body.status):
-		if ((body.status['Aggressiveness'] + _perception - aggressiveness) > 0):
+		if (body.status['Aggressiveness'] > 0):
 			setEmotion('Pain')
 		else:
 			setEmotion('Happy')

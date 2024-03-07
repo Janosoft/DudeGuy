@@ -4,8 +4,6 @@ signal achievementUnlocked
 @onready var dude_guy = $DudeGuy
 @onready var text_box = $TextBox
 
-const territoryTypes = {'FRIENDLY': -1, 'NEUTRAL': 0, 'HOSTILE': 1}
-var territoryType = territoryTypes.get('NEUTRAL')
 var temperature = 0
 
 var dialogs : Dictionary = {
@@ -21,8 +19,8 @@ var dialogs : Dictionary = {
 
 func _ready():
 	dude_guy.dialogs= dialogs
-	dude_guy.setPerception(territoryType)
 	dude_guy.setTemperature(temperature)
+	
 #region Emotion Buttons
 func _on_amazed_pressed():
 	dude_guy.setEmotion("Amazed")
