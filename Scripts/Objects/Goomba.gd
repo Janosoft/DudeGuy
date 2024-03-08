@@ -26,19 +26,21 @@ func _move(delta):
 		velocity.x = _SPEED * delta * _direction
 	if is_on_wall():
 		_direction *= -1
+		scale.x=-1
+		velocity.x = 0 #Not to get Stuck
 		position.x += 1 * _direction #Not to get Stuck
 
-func hit():
+func getHit():
 	_die()
 
 func _die():
 	_dying = true;
 	velocity.x = 0
-	_animatedSprite.play("die")
+	_animatedSprite.play("Die")
 
 func _on_animated_sprite_2d_animation_finished():
 	if _animatedSprite.animation == "die": queue_free()
 
 func _on_hitbox_body_entered(body):
 	if !body.is_on_floor():
-		hit()
+		getHit()
