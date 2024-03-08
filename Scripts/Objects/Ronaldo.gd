@@ -1,8 +1,6 @@
 extends CharacterBody2D
 
 #region Public Variables
-signal tacklingPlayer
-signal missesPlayer
 signal hit
 var status = {'isTackling' : 0}
 var direction = 1
@@ -32,20 +30,21 @@ func _on_hitbox_body_entered(body):
 	#print_debug(body.name + ' entered')
 	status['isTackling'] = 1
 	_animated_sprite_2d.play("Tackle")
-	emit_signal('tacklingPlayer')
 	if (_hit_timer.is_stopped()):
 		#print_debug('tacklingPlayer start')
 		_hit_timer.start()
 
 func _on_hitbox_body_exited(body):
 	#print_debug(body.name + ' exited')
-	status['isTackling'] = 0
-	_animated_sprite_2d.play("default")
-	emit_signal('missesPlayer')
+	if (status['isTackling']):
+		status['isTackling'] = 0
+		_animated_sprite_2d.play("default")
 	if (!_hit_timer.is_stopped()):
 		#print_debug('tacklingPlayer stop')
 		_hit_timer.stop()
 
 func _on_hit_timer_timeout():
 	#print_debug('Ronaldo hit')
+	status['isTackling'] = 0
+	_animated_sprite_2d.play("default")
 	emit_signal("hit")

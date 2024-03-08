@@ -63,8 +63,6 @@ autostart = true
 position = Vector2(166, 96)
 
 [connection signal="hit" from="Ronaldo" to="." method="_on_ronaldo_hit"]
-[connection signal="missesPlayer" from="Ronaldo" to="." method="_on_ronaldo_misses_player"]
-[connection signal="tacklingPlayer" from="Ronaldo" to="." method="_on_ronaldo_tackling_player"]
 [connection signal="got_ball" from="Messi" to="." method="_on_messi_got_ball"]
 [connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]
 [connection signal="timeout" from="UI/LabelTimer" to="." method="_on_label_timer_timeout"]
