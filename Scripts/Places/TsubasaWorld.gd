@@ -51,6 +51,12 @@ func _controls():
 	_messi.direction = Input.get_axis("move_left", "move_right")
 	_ronaldo.direction = 1 if (_messi.position.x - _ronaldo.position.x)>0 else 0
 
+func _gameOver():
+	print_debug('Game Over')
+	set_process(false)
+	set_physics_process(false)
+	emit_signal("gameOver")
+
 func _on_dude_guy_talking_signal(text):
 	_label.text = text
 	_label_timer.wait_time = len(text) * 0.17
@@ -60,10 +66,7 @@ func _on_label_timer_timeout():
 	_label.text = ''
 
 func _on_game_timer_timeout():
-	print_debug('Game Over')
-	set_process(false)
-	set_physics_process(false)
-	emit_signal("gameOver")
+	_gameOver()
 
 func _on_ronaldo_hit():
 	print_debug("hit balls")
