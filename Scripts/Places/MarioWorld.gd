@@ -7,6 +7,8 @@ signal gameOver
 #region Privated Variables
 @onready var _dude_guy = $DudeGuy
 @onready var _text_box = $CanvasLayer/TextBox
+@onready var _game_label = $CanvasLayer/GameLabel
+@onready var _game_timer = $CanvasLayer/GameTimer
 const _SPEED = 10
 const _MAXSPEED = 125
 const _JUMP_VELOCITY = 350.0
@@ -34,6 +36,10 @@ func _ready():
 	_dude_guy.dialogs= _dialogs
 	_dude_guy.emotions= _emotions
 
+func _process(delta):
+	var time = _game_timer.time_left
+	_game_label.text = "%02d" % fmod(time,60)
+
 func _physics_process(delta):
 	_apply_gravity(delta)
 	_controls()
@@ -55,10 +61,23 @@ func _controls():
 		_dude_guy.velocity.x =  max(_dude_guy.velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if _direction<0 else min(_dude_guy.velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
 	else:
 		_dude_guy.velocity.x = lerp(_dude_guy.velocity.x,0.0,0.2)
-	
+
+func _gameOver():
+	print_debug('Game Over')
+	set_process(false)
+	set_physics_process(false)
+	emit_signal("gameOver")
+
+
 func _on_brick_boring_achievement():
 	_dude_guy.setEmotion("Sad")
 	_dude_guy.talk("that was frustrating")
 
 func _on_dude_guy_talking_signal(text):
 	_text_box.setText(text)
+
+func _on_turtle_hit():
+	print_debug("Turtle Hit")
+
+func _on_game_timer_timeout():
+	_gameOver()
