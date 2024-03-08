@@ -15,13 +15,21 @@ var _dialogs : Dictionary = {
 		0: ["Aww, that's so sweet!", "How adorable!", "Oh, that's just too cute","Look at that, it's heartwarming", "That's so precious!"],
 		1: ["Oh no, that's terrifying!", "Yikes, I'm scared!", "That's giving me the creeps","I'm getting goosebumps", "Oh wow, that's really freaking me out!"]},
 	"Temperature":{
-		0: ["Ah, feels nice and warm over here", "It's cozy by this warmth", "Mmm, I can feel the heat, it's so comforting", "This warmth is just what I needed", "Oh, it's toasty around here, I love it"],
-		1: ["Brr, it's chilly around here", "Feels cold over here, but refreshing", "I can feel the coolness, it's quite invigorating", "This cold is bracing, but in a good way", "It's icy around here, but I don't mind"]}
+		0: ["Brr, it's chilly around here", "Feels cold over here, but refreshing", "I can feel the coolness, it's quite invigorating", "This cold is bracing, but in a good way", "It's icy around here, but I don't mind"],
+		1: ["Ah, feels nice and warm over here", "It's cozy by this warmth", "Mmm, I can feel the heat, it's so comforting", "This warmth is just what I needed", "Oh, it's toasty around here, I love it"]}
 	}
+var _emotions : Dictionary = {
+	"Striking": {
+		1: ["Wonder"]},
+	"Aggressiveness":{
+		0: ["Happy"],
+		1: ["Scared"]}
+	}	
 #endregion
 
 func _ready():
 	_dude_guy.dialogs= _dialogs
+	_dude_guy.emotions= _emotions
 	_dude_guy.setTemperature(_temperature)
 	
 #region Emotion Buttons

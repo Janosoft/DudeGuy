@@ -3,6 +3,7 @@ extends CharacterBody2D
 #region Public Variables
 signal talkingSignal
 var dialogs : Dictionary = {}
+var emotions : Dictionary = {}
 #endregion
 
 #region Privated Variables
@@ -38,30 +39,23 @@ func setTemperature(newTemperature: int):
 
 func emotionCalculator(thingStatus: Dictionary)-> String :
 	var maxStatus = ''
-	var maxValue = -5
-	var emotion = 'default'
+	var maxValue = -100
 	
 	for key in thingStatus.keys():
 		if (thingStatus[key] > maxValue):
 			maxStatus = key
 			maxValue = thingStatus[key]
 	
-	match maxStatus:
-		'Striking':
-			emotion = "Wonder"
-		'Aggressiveness':
-			if (maxValue > 0):
-				emotion = 'Scared'
-			else:
-				emotion = 'Happy'
-		_:
-			emotion = 'default'
-	
-	return emotion
+	#int(maxValue>0) allows to get more than an atribute and get 0 or 1 in the dialogs
+	#randi() % dialogs[maxStatus][int(maxValue>0)].size() takes an random text
+	if (maxStatus in emotions.keys()):
+		return emotions[maxStatus][int(maxValue>0)][randi() % emotions[maxStatus][int(maxValue>0)].size()]
+	else:
+		return 'default'
 
 func talkCalculator(thingStatus: Dictionary)-> String :
 	var maxStatus = ''
-	var maxValue = -5
+	var maxValue = -100
 	
 	for key in thingStatus.keys():
 		if (thingStatus[key] > maxValue):
@@ -73,7 +67,6 @@ func talkCalculator(thingStatus: Dictionary)-> String :
 	return dialogs[maxStatus][int(maxValue>0)][randi() % dialogs[maxStatus][int(maxValue>0)].size()]
 
 func checkObject(thing: Object):
-	#print_debug(thing.name)
 	if ('status' in thing):
 		var newEmotion:String = emotionCalculator(thing.status)
 		var words:String = talkCalculator(thing.status)

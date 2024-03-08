@@ -21,10 +21,18 @@ var _dialogs : Dictionary = {
 		0: ["Aww, that's so sweet!", "How adorable!", "Oh, that's just too cute","Look at that, it's heartwarming", "That's so precious!"],
 		1: ["Oh no, that's terrifying!", "Yikes, I'm scared!", "That's giving me the creeps","I'm getting goosebumps", "Oh wow, that's really freaking me out!"]},
 	}
+var _emotions : Dictionary = {
+	"Striking": {
+		1: ["Wonder"]},
+	"Aggressiveness":{
+		0: ["Happy"],
+		1: ["Scared"]}
+	}
 #endregion
 
 func _ready():
 	_dude_guy.dialogs= _dialogs
+	_dude_guy.emotions= _emotions
 
 func _physics_process(delta):
 	_apply_gravity(delta)

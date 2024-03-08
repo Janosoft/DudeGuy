@@ -23,10 +23,21 @@ var _dialogs : Dictionary = {
 	"isRolling":{
 		1: ["The ball is rolling forward.", "The ball is gliding across the field"]}
 	}
+var _emotions : Dictionary = {
+	"WithBall": {
+		0: ["Sad"],
+		1: ["Love"]},
+	"isTackling":{
+		0: ["Wonder"],
+		1: ["Angry"]},
+	"isRolling":{
+		1: ["default"]}
+	}
 #endregion
 
 func _ready():
 	_dude_guy.dialogs= _dialogs
+	_dude_guy.emotions= _emotions
 
 func _process(delta):
 	var time = _game_timer.time_left
@@ -47,16 +58,6 @@ func _on_dude_guy_talking_signal(text):
 
 func _on_label_timer_timeout():
 	_label.text = ''
-
-func _on_ronaldo_tackling_player():
-	#dude_guy.setEmotion('Scared')
-	#dude_guy.talk('Ronaldo tries to tackle Messi')
-	pass
-
-func _on_ronaldo_misses_player():
-	#dude_guy.setEmotion('Happy')
-	#dude_guy.talk('but Messi manages to escape')
-	pass
 
 func _on_game_timer_timeout():
 	print_debug('Game Over')
