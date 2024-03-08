@@ -3,6 +3,10 @@
 [ext_resource type="Script" path="res://Scripts/Objects/Goomba.gd" id="1_b2bc2"]
 [ext_resource type="Texture2D" uid="uid://d4kbe0v6ik3bl" path="res://Assets/Objects/Goomba.png" id="1_vkwdv"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d82ic"]
+atlas = ExtResource("1_vkwdv")
+region = Rect2(32, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p432o"]
 atlas = ExtResource("1_vkwdv")
 region = Rect2(0, 0, 16, 16)
@@ -11,12 +15,16 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("1_vkwdv")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d82ic"]
-atlas = ExtResource("1_vkwdv")
-region = Rect2(32, 0, 16, 16)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_p68if"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d82ic")
+}],
+"loop": false,
+"name": &"Die",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p432o")
@@ -26,14 +34,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d82ic")
-}],
-"loop": false,
-"name": &"die",
 "speed": 10.0
 }]
 
@@ -49,6 +49,7 @@ script = ExtResource("1_b2bc2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p68if")
+animation = &"Die"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
