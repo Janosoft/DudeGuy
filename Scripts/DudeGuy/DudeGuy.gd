@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 #region Public Variables
 signal talkingSignal
+@export var bodyVisible: bool = true
 var dialogs : Dictionary = {}
 var emotions : Dictionary = {}
 var actionsOnHit : Dictionary = {}
@@ -18,6 +19,7 @@ var _lastEmotion : String = 'default'
 #endregion
 
 func _ready():
+	if (!bodyVisible): _body.hideBody()
 	setEmotion(_actualEmotion)
 	
 func talk(words: String):

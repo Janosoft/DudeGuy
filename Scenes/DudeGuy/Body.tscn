@@ -1,9 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwavsymwhtco1"]
+[gd_scene load_steps=6 format=3 uid="uid://cwavsymwhtco1"]
 
 [ext_resource type="Script" path="res://Scripts/DudeGuy/Body.gd" id="1_ihuhv"]
 [ext_resource type="PackedScene" uid="uid://dh5xlvibjgqt4" path="res://Scenes/DudeGuy/Head.tscn" id="1_pupqh"]
+[ext_resource type="Texture2D" uid="uid://dpjn070euxu30" path="res://Assets/DudeGuy/Body/StaticBody.png" id="2_eiqag"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ndga"]
+atlas = ExtResource("2_eiqag")
+region = Rect2(0, 0, 32, 55)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i2n26"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ndga")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Body" type="Sprite2D"]
 script = ExtResource("1_ihuhv")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i2n26")
+
 [node name="Head" parent="." instance=ExtResource("1_pupqh")]
+position = Vector2(3, -36)

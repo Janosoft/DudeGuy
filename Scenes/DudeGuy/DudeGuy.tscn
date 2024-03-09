@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/DudeGuy/DudeGuy.gd" id="1_cj11d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jud0x"]
-size = Vector2(27, 64)
+size = Vector2(31, 71)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6nvc"]
 size = Vector2(29, 68)
@@ -16,7 +16,7 @@ script = ExtResource("1_cj11d")
 [node name="Body" parent="." instance=ExtResource("1_8cy8f")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, 24)
+position = Vector2(-0.5, -8.5)
 shape = SubResource("RectangleShape2D_jud0x")
 
 [node name="Hitbox" type="Area2D" parent="."]

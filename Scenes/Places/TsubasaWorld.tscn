@@ -21,7 +21,8 @@ position = Vector2(-50, 64)
 position = Vector2(122, 71)
 
 [node name="DudeGuy" parent="." instance=ExtResource("4_76aog")]
-position = Vector2(85, 170)
+position = Vector2(83, 205)
+bodyVisible = false
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
