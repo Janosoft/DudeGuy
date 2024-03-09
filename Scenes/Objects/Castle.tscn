@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnmeqkcpafx7a"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/Castle.gd" id="1_1akb7"]
+[ext_resource type="Texture2D" uid="uid://cf8fuyxfd6bdx" path="res://Assets/Objects/Castle.png" id="1_603xv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b5qjj"]
+size = Vector2(80, 80)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvipo"]
+radius = 8.0
+height = 32.0
+
+[node name="Castle" type="StaticBody2D"]
+collision_layer = 4
+script = ExtResource("1_1akb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_603xv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b5qjj")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 24)
+shape = SubResource("CapsuleShape2D_vvipo")
+debug_color = Color(0, 0.647059, 0.231373, 0.419608)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
