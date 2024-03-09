@@ -372,7 +372,7 @@ layer_0/tile_data = PackedInt32Array(851968, 524288, 2, 851969, 524288, 2, 85197
 position = Vector2(2590, 152)
 
 [node name="DudeGuy" parent="." instance=ExtResource("1_28rhf")]
-position = Vector2(25, 53)
+position = Vector2(22, 164)
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -385,7 +385,7 @@ position = Vector2(280, 104)
 position = Vector2(554, 184)
 
 [node name="Turtle" parent="Enemies" instance=ExtResource("6_f1xhi")]
-position = Vector2(124, 162)
+position = Vector2(739, 176)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
