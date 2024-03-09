@@ -69,17 +69,11 @@ func _on_game_timer_timeout():
 	_gameOver()
 
 func _on_ronaldo_hit():
-	print_debug("hit balls")
+	#print_debug("hit balls")
 	_messi.hit()
 	_ball.position.x = _messi.ball.position.x + _messi.position.x
 	_ball.visible= true
-	#dude_guy.setEmotion('Sad')
-	#dude_guy.talk('Messi loses the ball')
-	pass
 
 func _on_messi_got_ball():
-	print_debug("recovers balls")
+	#print_debug("recovers balls")
 	_ball.visible= false
-	#dude_guy.setEmotion('Love')
-	#dude_guy.talk('Messi recovered the ball')
-	pass
