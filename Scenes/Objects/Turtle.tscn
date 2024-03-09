@@ -69,5 +69,10 @@ debug_color = Color(0, 0.643137, 0.305882, 0.419608)
 wait_time = 2.0
 one_shot = true
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-4.76837e-07, 9)
+scale = Vector2(1.9, 0.7)
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="HitboxTimer" to="." method="_on_hitbox_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -5,12 +5,14 @@ var status = {'Aggressiveness' : 1}
 #endregion
 
 #region Privated Variables
+@onready var _screensize = get_viewport_rect().size
 @onready var _animatedSprite = $AnimatedSprite2D
 @onready var _hitbox = $Hitbox
 @onready var _hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitbox_timer = $HitboxTimer
 const _SPEED = 500
 var _direction = -1
+var _multiplicator = 1
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _hidding = false
 #endregion
@@ -26,9 +28,9 @@ func _apply_gravity(delta):
 
 func _move(delta):
 	if !_hidding: 
-		velocity.x = _SPEED * delta * _direction
+		velocity.x = _SPEED * delta * _direction * _multiplicator
 	else: #Move faster if it's hidding
-		velocity.x = _SPEED * delta * _direction * 10
+		velocity.x = _SPEED * delta * _direction * 10 * _multiplicator
 		
 	if is_on_wall():
 		_direction *= -1
@@ -51,3 +53,9 @@ func _on_hitbox_body_entered(body):
 	
 func _on_hitbox_timer_timeout():
 	_hitbox_collision_shape_2d.set_deferred("disabled", false)
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	if (_direction == 1): scale.x = -1
+	_direction = -1
+	_multiplicator *= 1.05
+	position.x += _screensize.x + 50
