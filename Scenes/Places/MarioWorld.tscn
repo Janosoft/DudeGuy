@@ -381,7 +381,7 @@ position = Vector2(280, 104)
 position = Vector2(554, 184)
 
 [node name="Turtle" parent="Enemies" instance=ExtResource("6_f1xhi")]
-position = Vector2(673, 174)
+position = Vector2(124, 162)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -399,5 +399,4 @@ autostart = true
 
 [connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]
 [connection signal="boringAchievement" from="Objects/Brick" to="." method="_on_brick_boring_achievement"]
-[connection signal="hit" from="Enemies/Turtle" to="." method="_on_turtle_hit"]
 [connection signal="timeout" from="CanvasLayer/GameTimer" to="." method="_on_game_timer_timeout"]

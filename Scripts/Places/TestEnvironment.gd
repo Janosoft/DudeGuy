@@ -7,7 +7,6 @@ signal achievementUnlocked
 #region Privated Variables
 @onready var _dude_guy = $DudeGuy
 @onready var _text_box = $TextBox
-var _temperature = 0
 var _dialogs : Dictionary = {
 	"Striking": {
 		1: ["Whoa, check that out, that's weird", "Wow, look over there, that's odd", "Take a look at that, it's pretty strange", "Oh my, what's that? That's unusual", "What's that? That's rather peculiar"]},
@@ -24,13 +23,25 @@ var _emotions : Dictionary = {
 	"Aggressiveness":{
 		0: ["Happy"],
 		1: ["Scared"]}
-	}	
+	}
+var _actionsOnHit : Dictionary = {
+	"Aggressiveness":{
+		1: ["setEmotion","Pain"]},
+	"Temperature":{
+		1: ["setTemperature","5"]}
+	}
+var _actionsOnLeaveHit : Dictionary = {
+	"Temperature":{
+		1: ["revertTemperature"],
+		}
+	}
 #endregion
 
 func _ready():
 	_dude_guy.dialogs= _dialogs
 	_dude_guy.emotions= _emotions
-	_dude_guy.setTemperature(_temperature)
+	_dude_guy.actionsOnHit= _actionsOnHit
+	_dude_guy.actionsOnLeaveHit= _actionsOnLeaveHit
 	
 #region Emotion Buttons
 func _on_amazed_pressed():

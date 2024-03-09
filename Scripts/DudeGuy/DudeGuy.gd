@@ -4,6 +4,8 @@ extends CharacterBody2D
 signal talkingSignal
 var dialogs : Dictionary = {}
 var emotions : Dictionary = {}
+var actionsOnHit : Dictionary = {}
+var actionsOnLeaveHit : Dictionary = {}
 #endregion
 
 #region Privated Variables
@@ -32,10 +34,13 @@ func setEmotion(newEmotion: String):
 	if (newEmotion != 'default'):
 		_emotion_timer.start()
 
-func setTemperature(newTemperature: int):
-	_lastTemperature= _temperature
-	_temperature= newTemperature
+func setTemperature(newTemperature: String):
+	_lastTemperature= int(_temperature)
+	_temperature= int(newTemperature)
 	_body.setTemperature(_temperature)
+
+func revertTemperature():
+	_body.setTemperature(_lastTemperature)
 
 func emotionCalculator(thingStatus: Dictionary)-> String :
 	var maxStatus = ''
@@ -66,6 +71,57 @@ func talkCalculator(thingStatus: Dictionary)-> String :
 	#randi() % dialogs[maxStatus][int(maxValue>0)].size() takes an random text
 	return dialogs[maxStatus][int(maxValue>0)][randi() % dialogs[maxStatus][int(maxValue>0)].size()]
 
+func actionOnHitCalculator(thingStatus: Dictionary):
+	var maxStatus = ''
+	var maxValue = -100
+	
+	for key in thingStatus.keys():
+		if (thingStatus[key] > maxValue):
+			maxStatus = key
+			maxValue = thingStatus[key]
+	
+	if (maxStatus in actionsOnHit):
+		#print_debug(maxStatus)
+		if (int(maxValue>0) in actionsOnHit[maxStatus]):
+			var funcName = 0
+			var funcParams = 1
+			if (funcName >= 0 && funcName < actionsOnHit[maxStatus].size()): #Function exists in actions?
+				var callable = Callable(self, actionsOnHit[maxStatus][int(maxValue>0)][funcName])
+				if (funcParams >= 0 && funcParams < actionsOnHit[maxStatus][int(maxValue>0)].size()): #Params exists in actions?
+					callable.call(actionsOnHit[maxStatus][int(maxValue>0)][funcParams])
+				else: #Run without params
+					callable.call()
+			else:
+				print_debug('action doesnt have a function... do nothing')
+		else:
+			
+			print_debug(actionsOnHit[maxStatus])
+			print_debug('action doesnt exist... do nothing')
+	
+func actionOnLeaveHitCalculator(thingStatus: Dictionary):
+	var maxStatus = ''
+	var maxValue = -100
+	
+	for key in thingStatus.keys():
+		if (thingStatus[key] > maxValue):
+			maxStatus = key
+			maxValue = thingStatus[key]
+	
+	if (maxStatus in actionsOnLeaveHit):
+		if (maxValue in actionsOnLeaveHit[maxStatus]):
+			var funcName = 0
+			var funcParams = 1
+			if (funcName >= 0 && funcName < actionsOnLeaveHit[maxStatus].size()): #Function exists in actions?
+				var callable = Callable(self, actionsOnLeaveHit[maxStatus][maxValue][funcName])
+				if (funcParams >= 0 && funcParams < actionsOnLeaveHit[maxStatus][maxValue].size()): #Params exists in actions?
+					callable.call(actionsOnLeaveHit[maxStatus][maxValue][funcParams])
+				else: #Run without params
+					callable.call()
+			else:
+				print_debug('action doesnt have a function... do nothing')
+		else:
+			print_debug('action doesnt exist... do nothing')
+
 func checkObject(thing: Object):
 	if ('status' in thing):
 		var newEmotion:String = emotionCalculator(thing.status)
@@ -76,24 +132,13 @@ func checkObject(thing: Object):
 #region Catch Signals#
 func _on_hitbox_body_entered(body):
 	#print_debug("Trasspassing: " + body.name)
-	if ('Temperature' in body.status):
-		if (body.status['Temperature'] != 0): setTemperature(body.status['Temperature'])
-		var words:String = talkCalculator(body.status)
-		if (!words.is_empty()) :talk(words)
-	if ('Aggressiveness' in body.status):
-		if (body.status['Aggressiveness'] > 0):
-			setEmotion('Pain')
-		else:
-			setEmotion('Happy')
-		var words:String = talkCalculator(body.status)
-		if (!words.is_empty()) :talk(words)
+	#print_debug("Action: " + body.status)
+	actionOnHitCalculator(body.status)
 	
 func _on_hitbox_body_exited(body):
-	#print_debug("Leaving: " + body.name)
-	if ('temperature' in body):
-		if (body.temperature != 0): setTemperature(_lastTemperature)
-	if ('aggressiveness' in body):
-		if (body.aggressiveness > 0): setEmotion(_lastEmotion)
+	#print_debug("Trasspassing: " + body.name)
+	#print_debug("Action: " + body.status)
+	actionOnLeaveHitCalculator(body.status)
 
 func _on_emotion_timer_timeout():
 	setEmotion('default')

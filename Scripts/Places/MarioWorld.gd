@@ -30,11 +30,18 @@ var _emotions : Dictionary = {
 		0: ["Happy"],
 		1: ["Scared"]}
 	}
+var _actionsOnHit : Dictionary = {
+	"Aggressiveness":{
+		1: ["setEmotion","Pain"]}
+	}
+var _actionsOnLeaveHit : Dictionary = {}
 #endregion
 
 func _ready():
 	_dude_guy.dialogs= _dialogs
 	_dude_guy.emotions= _emotions
+	_dude_guy.actionsOnHit= _actionsOnHit
+	_dude_guy.actionsOnLeaveHit= _actionsOnLeaveHit
 
 func _process(delta):
 	var time = _game_timer.time_left
@@ -68,16 +75,12 @@ func _gameOver():
 	set_physics_process(false)
 	emit_signal("gameOver")
 
-
 func _on_brick_boring_achievement():
 	_dude_guy.setEmotion("Sad")
 	_dude_guy.talk("that was frustrating")
 
 func _on_dude_guy_talking_signal(text):
 	_text_box.setText(text)
-
-func _on_turtle_hit():
-	print_debug("Turtle Hit")
 
 func _on_game_timer_timeout():
 	_gameOver()

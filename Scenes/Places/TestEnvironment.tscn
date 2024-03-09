@@ -10,13 +10,13 @@
 script = ExtResource("1_ngu0u")
 
 [node name="Fire" parent="." instance=ExtResource("2_n1d3h")]
-position = Vector2(161, 190)
+position = Vector2(158, 189)
 
 [node name="DudeGuy" parent="." instance=ExtResource("1_d6uce")]
 position = Vector2(20, 165)
 
 [node name="FurryMonster" parent="." instance=ExtResource("3_b54fw")]
-position = Vector2(289, 182)
+position = Vector2(289, 180)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
