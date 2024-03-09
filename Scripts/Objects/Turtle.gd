@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
-#region Public Variables
-signal hit
+#region Public Variable
 var status = {'Aggressiveness' : 1}
 #endregion
 
@@ -44,12 +43,11 @@ func getHit():
 		_animatedSprite.play("Hide")
 
 func _on_hitbox_body_entered(body):
-	hitbox_timer.start()
-	_hitbox_collision_shape_2d.set_deferred("disabled", true)
+	#Get hits only from above
 	if !body.is_on_floor():
+		hitbox_timer.start()
+		_hitbox_collision_shape_2d.set_deferred("disabled", true)
 		getHit()
-	else:
-		emit_signal("hit")
 	
 func _on_hitbox_timer_timeout():
 	_hitbox_collision_shape_2d.set_deferred("disabled", false)
