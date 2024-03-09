@@ -84,3 +84,6 @@ func _on_dude_guy_talking_signal(text):
 
 func _on_game_timer_timeout():
 	_gameOver()
+
+func _on_castle_enter_castle():
+	_gameOver()
