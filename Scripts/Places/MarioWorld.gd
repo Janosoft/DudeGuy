@@ -58,7 +58,7 @@ func _apply_gravity(delta):
 
 func _controls():
 	if _dude_guy.is_on_floor():
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("move_up"):
 			_dude_guy.velocity.y = - _JUMP_VELOCITY
 	_direction = Input.get_axis("move_left", "move_right")	
 	if _direction:
