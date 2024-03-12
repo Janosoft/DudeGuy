@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://dmlerrfywmx4u"]
+
+[ext_resource type="Texture2D" uid="uid://dyo2x15or3y10" path="res://Assets/Objects/BillyLee.png" id="1_ff0ko"]
+[ext_resource type="Script" path="res://Scripts/Objects/BillyLee.gd" id="1_jga6x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ibsb"]
+atlas = ExtResource("1_ff0ko")
+region = Rect2(0, 0, 31, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v43gx"]
+atlas = ExtResource("1_ff0ko")
+region = Rect2(93, 0, 31, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86fes"]
+atlas = ExtResource("1_ff0ko")
+region = Rect2(0, 0, 31, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulndu"]
+atlas = ExtResource("1_ff0ko")
+region = Rect2(124, 0, 31, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shmll"]
+atlas = ExtResource("1_ff0ko")
+region = Rect2(0, 0, 31, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4v7q"]
+atlas = ExtResource("1_ff0ko")
+region = Rect2(31, 0, 31, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42uoc"]
+atlas = ExtResource("1_ff0ko")
+region = Rect2(62, 0, 31, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x6jwc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ibsb")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v43gx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86fes")
+}],
+"loop": false,
+"name": &"hit_1",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulndu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shmll")
+}],
+"loop": false,
+"name": &"hit_2",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4v7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42uoc")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl6t5"]
+size = Vector2(17, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_et48b"]
+size = Vector2(19, 8)
+
+[node name="BillyLee" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 8
+script = ExtResource("1_jga6x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x6jwc")
+animation = &"hit_2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7.5, 0.5)
+shape = SubResource("RectangleShape2D_jl6t5")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(5.5, -9)
+shape = SubResource("RectangleShape2D_et48b")
+debug_color = Color(0, 0.635294, 0.407843, 0.419608)
