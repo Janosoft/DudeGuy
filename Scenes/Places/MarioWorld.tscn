@@ -116,6 +116,7 @@ texture = ExtResource("2_8awx0")
 6:2/0 = 0
 6:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:2/0/physics_layer_0/angular_velocity = 0.0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:2/0 = 0
 7:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:2/0/physics_layer_0/angular_velocity = 0.0
@@ -400,6 +401,7 @@ position = Vector2(739, 176)
 
 [node name="TextBox" parent="CanvasLayer" instance=ExtResource("5_2i6pg")]
 position = Vector2(128, 7)
+collision_layer = 0
 
 [node name="GameLabel" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
