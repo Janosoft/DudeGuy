@@ -10,6 +10,7 @@ size = Vector2(256, 14)
 
 [node name="TextBox" type="CharacterBody2D"]
 visible = false
+light_mask = 0
 script = ExtResource("1_h3qcd")
 
 [node name="Label" type="Label" parent="."]
