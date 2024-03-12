@@ -11,11 +11,12 @@ signal gameOver
 @onready var _game_timer = $CanvasLayer/GameTimer
 const _SPEED = 10
 const _MAXSPEED = 125
-const _JUMP_VELOCITY = 350.0
+const _JUMP_VELOCITY = 500
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _direction = 1
 var _lastDirection = 1
 var _currentSpeed = 1
+var _worldsize = 0
 var _dialogs : Dictionary = {
 	"Striking": {
 		1: ["Whoa, check that out, that's weird", "Wow, look over there, that's odd", "Take a look at that, it's pretty strange", "Oh my, what's that? That's unusual", "What's that? That's rather peculiar"]},
@@ -38,6 +39,7 @@ var _actionsOnLeaveHit : Dictionary = {}
 #endregion
 
 func _ready():
+	_worldsize = $"World 1-1".get_used_rect().size.x * $"World 1-1".tile_set.tile_size.x
 	_dude_guy.dialogs= _dialogs
 	_dude_guy.emotions= _emotions
 	_dude_guy.actionsOnHit= _actionsOnHit
@@ -67,8 +69,10 @@ func _controls():
 			_dude_guy.scale.x=-1
 		_dude_guy.velocity.x =  max(_dude_guy.velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if _direction<0 else min(_dude_guy.velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
 	else:
-		_dude_guy.velocity.x = lerp(_dude_guy.velocity.x,0.0,0.2)
-
+		_dude_guy.velocity.x = lerp(_dude_guy.velocity.x,0.0,0.2)	
+	
+	#Limits the movements inside the level
+	_dude_guy.position.x = clamp(_dude_guy.position.x, 17, _worldsize)
 func _gameOver():
 	print_debug('Game Over')
 	set_process(false)

@@ -6,7 +6,7 @@ signal gameOver
 
 #region Privated Variables
 @onready var _dude_guy = $DudeGuy
-@onready var _screensize = get_viewport_rect().size
+@onready var _background = $Background
 const _SPEED = 10
 const _MAXSPEED = 125
 const _JUMP_VELOCITY = 350.0
@@ -53,7 +53,13 @@ func _controls():
 		_dude_guy.velocity.x =  max(_dude_guy.velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if _direction.x<0 else min(_dude_guy.velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
 	else:
 		_dude_guy.velocity.x = lerp(_dude_guy.velocity.x,0.0,0.2)
+	
 	if (_direction.y):
 		_dude_guy.velocity.y =  max(_dude_guy.velocity.y - _SPEED, -_MAXSPEED) * _currentSpeed if _direction.y<0 else min(_dude_guy.velocity.y + _SPEED, _MAXSPEED) * _currentSpeed
 	else:
 		_dude_guy.velocity.y = lerp(_dude_guy.velocity.y,0.0,0.2)
+	
+	#Limits the movements inside the level
+	_dude_guy.position.x = clamp(_dude_guy.position.x, 17, _background.texture.get_size().x-50)
+	_dude_guy.position.y = clamp(_dude_guy.position.y, 116, _background.texture.get_size().y)
+	
