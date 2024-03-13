@@ -1,0 +1,111 @@
+[gd_scene load_steps=13 format=3 uid="uid://hn0wcrkg0vk8"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/Abobo.gd" id="1_fcqcs"]
+[ext_resource type="Texture2D" uid="uid://bsspkgrtegqfb" path="res://Assets/Objects/Abobo.png" id="1_ru3da"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urnx0"]
+atlas = ExtResource("1_ru3da")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjpf6"]
+atlas = ExtResource("1_ru3da")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4rcq"]
+atlas = ExtResource("1_ru3da")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxxmr"]
+atlas = ExtResource("1_ru3da")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p37k3"]
+atlas = ExtResource("1_ru3da")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w73sh"]
+atlas = ExtResource("1_ru3da")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jecua"]
+atlas = ExtResource("1_ru3da")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_indbg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urnx0")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjpf6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4rcq")
+}],
+"loop": false,
+"name": &"hit_1",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxxmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p37k3")
+}],
+"loop": false,
+"name": &"hit_2",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w73sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jecua")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_778ax"]
+size = Vector2(24, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xyb1e"]
+size = Vector2(20, 10)
+
+[node name="Abobo" type="CharacterBody2D"]
+scale = Vector2(-1, 1)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_fcqcs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_indbg")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_778ax")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(13, -9)
+shape = SubResource("RectangleShape2D_xyb1e")
+disabled = true
+debug_color = Color(0, 0.639216, 0.372549, 0.419608)
+
+[node name="HitboxTimer" type="Timer" parent="Hitbox"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="Hitbox/HitboxTimer" to="." method="_on_hitbox_timer_timeout"]
