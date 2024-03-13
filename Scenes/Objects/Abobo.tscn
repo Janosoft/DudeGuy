@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://hn0wcrkg0vk8"]
+[gd_scene load_steps=14 format=3 uid="uid://hn0wcrkg0vk8"]
 
 [ext_resource type="Script" path="res://Scripts/Objects/Abobo.gd" id="1_fcqcs"]
 [ext_resource type="Texture2D" uid="uid://bsspkgrtegqfb" path="res://Assets/Objects/Abobo.png" id="1_ru3da"]
@@ -81,6 +81,9 @@ size = Vector2(24, 48)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xyb1e"]
 size = Vector2(20, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5vwn"]
+size = Vector2(5, 48)
+
 [node name="Abobo" type="CharacterBody2D"]
 scale = Vector2(-1, 1)
 collision_layer = 8
@@ -96,6 +99,8 @@ position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_778ax")
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(13, -9)
@@ -107,5 +112,20 @@ debug_color = Color(0, 0.639216, 0.372549, 0.419608)
 wait_time = 0.5
 one_shot = true
 
+[node name="Hitzone" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitzone"]
+position = Vector2(7.5, 0)
+shape = SubResource("RectangleShape2D_t5vwn")
+debug_color = Color(0.929412, 0.235294, 0.317647, 0.419608)
+
+[node name="HitzoneTimer" type="Timer" parent="Hitzone"]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="Hitbox/HitboxTimer" to="." method="_on_hitbox_timer_timeout"]
+[connection signal="body_entered" from="Hitzone" to="." method="_on_hitzone_body_entered"]
+[connection signal="timeout" from="Hitzone/HitzoneTimer" to="." method="_on_hitzone_timer_timeout"]
