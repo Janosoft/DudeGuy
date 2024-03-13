@@ -1,41 +1,41 @@
 [gd_scene load_steps=13 format=3 uid="uid://dmlerrfywmx4u"]
 
-[ext_resource type="Texture2D" uid="uid://dyo2x15or3y10" path="res://Assets/Objects/BillyLee.png" id="1_ff0ko"]
 [ext_resource type="Script" path="res://Scripts/Objects/BillyLee.gd" id="1_jga6x"]
+[ext_resource type="Texture2D" uid="uid://da74v2p2214wn" path="res://Assets/Objects/BillyLeeBody.png" id="2_vvhjv"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ibsb"]
-atlas = ExtResource("1_ff0ko")
-region = Rect2(0, 0, 31, 40)
+[sub_resource type="AtlasTexture" id="AtlasTexture_igybu"]
+atlas = ExtResource("2_vvhjv")
+region = Rect2(0, 0, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v43gx"]
-atlas = ExtResource("1_ff0ko")
-region = Rect2(93, 0, 31, 40)
+[sub_resource type="AtlasTexture" id="AtlasTexture_womin"]
+atlas = ExtResource("2_vvhjv")
+region = Rect2(144, 0, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_86fes"]
-atlas = ExtResource("1_ff0ko")
-region = Rect2(0, 0, 31, 40)
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnwkw"]
+atlas = ExtResource("2_vvhjv")
+region = Rect2(0, 0, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ulndu"]
-atlas = ExtResource("1_ff0ko")
-region = Rect2(124, 0, 31, 40)
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0mdv"]
+atlas = ExtResource("2_vvhjv")
+region = Rect2(192, 0, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_shmll"]
-atlas = ExtResource("1_ff0ko")
-region = Rect2(0, 0, 31, 40)
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiswg"]
+atlas = ExtResource("2_vvhjv")
+region = Rect2(0, 0, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c4v7q"]
-atlas = ExtResource("1_ff0ko")
-region = Rect2(31, 0, 31, 40)
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgx01"]
+atlas = ExtResource("2_vvhjv")
+region = Rect2(48, 0, 48, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_42uoc"]
-atlas = ExtResource("1_ff0ko")
-region = Rect2(62, 0, 31, 40)
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ug7l"]
+atlas = ExtResource("2_vvhjv")
+region = Rect2(96, 0, 48, 40)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x6jwc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6ibsb")
+"texture": SubResource("AtlasTexture_igybu")
 }],
 "loop": false,
 "name": &"default",
@@ -43,10 +43,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v43gx")
+"texture": SubResource("AtlasTexture_womin")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_86fes")
+"texture": SubResource("AtlasTexture_cnwkw")
 }],
 "loop": false,
 "name": &"hit_1",
@@ -54,10 +54,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ulndu")
+"texture": SubResource("AtlasTexture_w0mdv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_shmll")
+"texture": SubResource("AtlasTexture_uiswg")
 }],
 "loop": false,
 "name": &"hit_2",
@@ -65,13 +65,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c4v7q")
+"texture": SubResource("AtlasTexture_rgx01")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_42uoc")
+"texture": SubResource("AtlasTexture_1ug7l")
 }],
 "loop": true,
-"name": &"walking",
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -82,16 +82,17 @@ size = Vector2(17, 39)
 size = Vector2(19, 8)
 
 [node name="BillyLee" type="CharacterBody2D"]
+position = Vector2(2, 0)
 collision_layer = 2
-collision_mask = 8
+collision_mask = 0
 script = ExtResource("1_jga6x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_x6jwc")
-animation = &"hit_2"
+animation = &"walk"
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-7.5, 0.5)
 shape = SubResource("RectangleShape2D_jl6t5")
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -99,6 +100,14 @@ collision_layer = 2
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(5.5, -9)
+position = Vector2(13, -9)
 shape = SubResource("RectangleShape2D_et48b")
+disabled = true
 debug_color = Color(0, 0.635294, 0.407843, 0.419608)
+
+[node name="HitboxTimer" type="Timer" parent="HitBox"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="timeout" from="HitBox/HitboxTimer" to="." method="_on_hitbox_timer_timeout"]
