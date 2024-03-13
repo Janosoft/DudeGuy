@@ -3,6 +3,7 @@ extends CharacterBody2D
 #region Public Variables
 signal enemyHits
 var status = {'Aggressiveness' : 1}
+var direction: Vector2 = Vector2(0,0)
 #endregion
 
 #region Privated Variables
@@ -11,8 +12,7 @@ var status = {'Aggressiveness' : 1}
 @onready var _hitbox_timer = $Hitbox/HitboxTimer
 @onready var _hitzone_collision_shape_2d = $Hitzone/CollisionShape2D
 @onready var _hitzone_timer = $Hitzone/HitzoneTimer
-
-var _direction: Vector2 = Vector2(0,0)
+var _lastDirection = -1
 var _isHitting = false
 const _SPEED = 5
 const _MAXSPEED = 10
@@ -31,13 +31,16 @@ func _move():
 		velocity.x = lerp(velocity.x,0.0,0.01)
 		velocity.y = lerp(velocity.y,0.0,0.01)
 	else:
-		if (_direction.x>0):
+		if (_lastDirection != sign(direction.x)):
+			_lastDirection = sign(direction.x)
+			scale.x=-2
+		if (direction.x>0):
 			velocity.x = min(velocity.x + _SPEED, _MAXSPEED)
-		elif (_direction.x<0):
+		elif (direction.x<0):
 			velocity.x = max(velocity.x - _SPEED, -_MAXSPEED)
-		if (_direction.y>0):
+		if (direction.y>0):
 			velocity.y = min(velocity.y + _SPEED, _MAXSPEED)
-		elif (_direction.y<0):
+		elif (direction.y<0):
 			velocity.y = max(velocity.y - _SPEED, -_MAXSPEED)
 
 func _hit():

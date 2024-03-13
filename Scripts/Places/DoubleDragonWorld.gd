@@ -6,7 +6,8 @@ signal gameOver
 
 #region Privated Variables
 @onready var _dude_guy = $DudeGuy
-@onready var billy_lee = $BillyLee
+@onready var _billy_lee = $BillyLee
+@onready var _abobo = $Abobo
 @onready var _background = $Background
 @onready var _text_box = $CanvasLayer/TextBox
 const _SPEED = 10
@@ -39,7 +40,7 @@ func _ready():
 func _physics_process(delta):
 	_controls()
 	_dude_guy.move_and_slide()
-	billy_lee.move_and_slide()
+	_billy_lee.move_and_slide()
 
 func _controls():
 	_direction = Input.get_vector("move_left","move_right","move_up","move_down")
@@ -47,34 +48,37 @@ func _controls():
 		if (_lastDirection != sign(_direction.x)):
 			_lastDirection = sign(_direction.x)
 			_dude_guy.scale.x=-1
-			billy_lee.scale.x=-2
+			_billy_lee.scale.x=-2
 		_dude_guy.velocity.x =  max(_dude_guy.velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if _direction.x<0 else min(_dude_guy.velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
-		billy_lee.velocity.x =  max(billy_lee.velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if _direction.x<0 else min(billy_lee.velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
+		_billy_lee.velocity.x =  max(_billy_lee.velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if _direction.x<0 else min(_billy_lee.velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
 	else:
 		_dude_guy.velocity.x = lerp(_dude_guy.velocity.x,0.0,0.2)
-		billy_lee.velocity.x = lerp(billy_lee.velocity.x,0.0,0.2)
+		_billy_lee.velocity.x = lerp(_billy_lee.velocity.x,0.0,0.2)
 	
 	if (_direction.y):
 		_dude_guy.velocity.y =  max(_dude_guy.velocity.y - _SPEED, -_MAXSPEED) * _currentSpeed if _direction.y<0 else min(_dude_guy.velocity.y + _SPEED, _MAXSPEED) * _currentSpeed
-		billy_lee.velocity.y =  max(billy_lee.velocity.y - _SPEED, -_MAXSPEED) * _currentSpeed if _direction.y<0 else min(billy_lee.velocity.y + _SPEED, _MAXSPEED) * _currentSpeed
+		_billy_lee.velocity.y =  max(_billy_lee.velocity.y - _SPEED, -_MAXSPEED) * _currentSpeed if _direction.y<0 else min(_billy_lee.velocity.y + _SPEED, _MAXSPEED) * _currentSpeed
 	else:
 		_dude_guy.velocity.y = lerp(_dude_guy.velocity.y,0.0,0.2)
-		billy_lee.velocity.y = lerp(billy_lee.velocity.y,0.0,0.2)
+		_billy_lee.velocity.y = lerp(_billy_lee.velocity.y,0.0,0.2)
 	
 	#Limits the movements inside the level
 	_dude_guy.position.x = clamp(_dude_guy.position.x, 17, _background.texture.get_size().x-50)
 	_dude_guy.position.y = clamp(_dude_guy.position.y, 116, _background.texture.get_size().y)
-	billy_lee.position.x = clamp(billy_lee.position.x, 17, _background.texture.get_size().x-50)
-	billy_lee.position.y = clamp(billy_lee.position.y, 113, _background.texture.get_size().y-3)
+	_billy_lee.position.x = clamp(_billy_lee.position.x, 17, _background.texture.get_size().x-50)
+	_billy_lee.position.y = clamp(_billy_lee.position.y, 113, _background.texture.get_size().y-3)
 	
 	if Input.is_action_just_pressed("fire"):
-		billy_lee.hit()
+		_billy_lee.hit()
+	
+	#Moves Abobo
+	_abobo.direction = Vector2(sign(_dude_guy.position.x + 17 - _abobo.position.x), sign(_dude_guy.position.y - 17 - _abobo.position.y))
 
 func _on_billy_lee_enemy_hit(body):
 	_timesHit = 0
 	_dude_guy.setEmotion("Happy")
 	_dude_guy.talk("Take that!")
-	body.getHit(billy_lee.position.x - body.position.x)
+	body.getHit(_billy_lee.position.x - body.position.x)
 
 func _on_dude_guy_talking_signal(text):
 	_text_box.setText(text)
