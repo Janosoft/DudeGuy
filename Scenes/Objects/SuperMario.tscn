@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqb1h1xwkifdw"]
+
+[ext_resource type="Texture2D" uid="uid://bty8yt37bk82n" path="res://Assets/Objects/SumerMarioBody.png" id="1_4y3eb"]
+[ext_resource type="Script" path="res://Scripts/Objects/SuperMario.gd" id="1_j8pou"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65t2e"]
+atlas = ExtResource("1_4y3eb")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp4o3"]
+atlas = ExtResource("1_4y3eb")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pphb4"]
+atlas = ExtResource("1_4y3eb")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2nhp"]
+atlas = ExtResource("1_4y3eb")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t8vw6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65t2e")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pp4o3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pphb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2nhp")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvylp"]
+size = Vector2(16, 32)
+
+[node name="SuperMario" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_j8pou")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_t8vw6")
+autoplay = "default"
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wvylp")

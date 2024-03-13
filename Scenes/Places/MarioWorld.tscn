@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6ny7bto8n3oe"]
+[gd_scene load_steps=12 format=3 uid="uid://b6ny7bto8n3oe"]
 
 [ext_resource type="PackedScene" uid="uid://c3dmqtyel4dmq" path="res://Scenes/DudeGuy/DudeGuy.tscn" id="1_28rhf"]
 [ext_resource type="Script" path="res://Scripts/Places/MarioWorld.gd" id="1_j5ggm"]
 [ext_resource type="Texture2D" uid="uid://bcokutx01q2cd" path="res://Assets/Places/MarioWorld.png" id="2_8awx0"]
 [ext_resource type="PackedScene" uid="uid://dt8h2m8e6j71a" path="res://Scenes/Objects/Brick.tscn" id="2_17rac"]
+[ext_resource type="PackedScene" uid="uid://cqb1h1xwkifdw" path="res://Scenes/Objects/SuperMario.tscn" id="4_2anej"]
 [ext_resource type="PackedScene" uid="uid://b7icaeuogcqr8" path="res://Scenes/Objects/TextBox.tscn" id="5_2i6pg"]
 [ext_resource type="PackedScene" uid="uid://b5dffrdlek8de" path="res://Scenes/Objects/Goomba.tscn" id="6_eo0gj"]
 [ext_resource type="PackedScene" uid="uid://dqdap6ocg62a" path="res://Scenes/Objects/Turtle.tscn" id="6_f1xhi"]
@@ -372,8 +373,13 @@ layer_0/tile_data = PackedInt32Array(851968, 524288, 2, 851969, 524288, 2, 85197
 [node name="Castle" parent="." instance=ExtResource("8_ijuek")]
 position = Vector2(2590, 152)
 
+[node name="SuperMario" parent="." instance=ExtResource("4_2anej")]
+position = Vector2(23, 153)
+scale = Vector2(2, 2.4)
+
 [node name="DudeGuy" parent="." instance=ExtResource("1_28rhf")]
 position = Vector2(22, 164)
+bodyVisible = false
 
 [node name="Objects" type="Node2D" parent="."]
 
