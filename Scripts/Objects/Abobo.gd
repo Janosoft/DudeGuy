@@ -42,6 +42,12 @@ func _move():
 			velocity.y = min(velocity.y + _SPEED, _MAXSPEED)
 		elif (direction.y<0):
 			velocity.y = max(velocity.y - _SPEED, -_MAXSPEED)
+	
+	if (_isHitting == false):
+		if (direction.x or direction.y):
+			_animated_sprite_2d.play("walk")
+		else:
+			_animated_sprite_2d.play("default")
 
 func _hit():
 	_isHitting = true
