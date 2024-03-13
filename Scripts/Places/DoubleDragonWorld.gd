@@ -44,6 +44,10 @@ func _physics_process(delta):
 
 func _controls():
 	_direction = Input.get_vector("move_left","move_right","move_up","move_down")
+	if (_direction.x or _direction.y):
+		_billy_lee.walk()
+	else:
+		_billy_lee.stand()
 	if (_direction.x):
 		if (_lastDirection != sign(_direction.x)):
 			_lastDirection = sign(_direction.x)

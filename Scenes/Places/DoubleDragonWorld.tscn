@@ -29,7 +29,7 @@ position = Vector2(41, 155)
 scale = Vector2(2, 2)
 
 [node name="DudeGuy" parent="." instance=ExtResource("2_6t4gm")]
-position = Vector2(42, 158)
+position = Vector2(42, 161)
 bodyVisible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

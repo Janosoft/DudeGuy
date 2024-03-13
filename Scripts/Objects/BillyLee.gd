@@ -10,11 +10,17 @@ signal enemyHit
 @onready var _hitbox_timer = $HitBox/HitboxTimer
 #endregion
 
+
+func walk():
+	_animated_sprite_2d.play("walk")
+
+func stand():
+	_animated_sprite_2d.play("default")
+
 func hit():
-	if (!_animated_sprite_2d.is_playing()): 
-		_animated_sprite_2d.play("hit_" + str(randi() % 2 + 1))
-		_hitbox_collision_shape_2d.set_deferred("disabled", false)
-		_hitbox_timer.start()
+	_animated_sprite_2d.play("hit_" + str(randi() % 2 + 1))
+	_hitbox_collision_shape_2d.set_deferred("disabled", false)
+	_hitbox_timer.start()
 
 func _on_hit_box_body_entered(body):
 	emit_signal("enemyHit", body)
