@@ -14,10 +14,10 @@ const _MAXSPEED = 15
 #endregion
 
 func _physics_process(delta):
-	_move(delta)
+	_move()
 	move_and_slide()
 
-func _move(delta):
+func _move():
 	if (status['isTackling']):
 		velocity.x = lerp(velocity.x,0.0,0.01)
 	else:
