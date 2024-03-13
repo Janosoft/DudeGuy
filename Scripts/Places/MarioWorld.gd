@@ -73,6 +73,7 @@ func _controls():
 	
 	#Limits the movements inside the level
 	_dude_guy.position.x = clamp(_dude_guy.position.x, 17, _worldsize)
+
 func _gameOver():
 	print_debug('Game Over')
 	set_process(false)
