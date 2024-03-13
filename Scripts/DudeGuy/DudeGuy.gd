@@ -135,12 +135,12 @@ func checkObject(thing: Object):
 func _on_hitbox_body_entered(body):
 	#print_debug("Trasspassing: " + body.name)
 	#print_debug("Action: " + body.status)
-	actionOnHitCalculator(body.status)
+	if ("status" in body): actionOnHitCalculator(body.status)
 	
 func _on_hitbox_body_exited(body):
 	#print_debug("Trasspassing: " + body.name)
 	#print_debug("Action: " + body.status)
-	actionOnLeaveHitCalculator(body.status)
+	if ("status" in body): actionOnLeaveHitCalculator(body.status)
 
 func _on_emotion_timer_timeout():
 	setEmotion('default')
