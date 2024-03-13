@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d20i8mqfyti5k"]
+[gd_scene load_steps=7 format=3 uid="uid://d20i8mqfyti5k"]
 
 [ext_resource type="Script" path="res://Scripts/Places/DoubleDragonWorld.gd" id="1_jp452"]
 [ext_resource type="Texture2D" uid="uid://c0pcoji8v80od" path="res://Assets/Places/DoubleDragon World.png" id="1_x4goy"]
 [ext_resource type="PackedScene" uid="uid://c3dmqtyel4dmq" path="res://Scenes/DudeGuy/DudeGuy.tscn" id="2_6t4gm"]
 [ext_resource type="PackedScene" uid="uid://dmlerrfywmx4u" path="res://Scenes/Objects/BillyLee.tscn" id="3_xlble"]
 [ext_resource type="PackedScene" uid="uid://hn0wcrkg0vk8" path="res://Scenes/Objects/Abobo.tscn" id="5_0r6b4"]
+[ext_resource type="PackedScene" uid="uid://b7icaeuogcqr8" path="res://Scenes/Objects/TextBox.tscn" id="6_ylh0e"]
 
 [node name="DoubleDragonWorld" type="Node2D"]
 script = ExtResource("1_jp452")
@@ -31,4 +32,11 @@ scale = Vector2(2, 2)
 position = Vector2(42, 158)
 bodyVisible = false
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextBox" parent="CanvasLayer" instance=ExtResource("6_ylh0e")]
+position = Vector2(128, 7)
+
+[connection signal="enemyHits" from="Abobo" to="." method="_on_abobo_enemy_hits"]
 [connection signal="enemyHit" from="BillyLee" to="." method="_on_billy_lee_enemy_hit"]
+[connection signal="talkingSignal" from="DudeGuy" to="." method="_on_dude_guy_talking_signal"]

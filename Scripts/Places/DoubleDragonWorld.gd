@@ -8,29 +8,24 @@ signal gameOver
 @onready var _dude_guy = $DudeGuy
 @onready var billy_lee = $BillyLee
 @onready var _background = $Background
+@onready var _text_box = $CanvasLayer/TextBox
 const _SPEED = 10
 const _MAXSPEED = 125
 const _JUMP_VELOCITY = 350.0
+var _timesHit = 0
 var _direction = 1
 var _lastDirection = 1
 var _currentSpeed = 1
 var _dialogs : Dictionary = {
-	"Striking": {
-		1: ["Whoa, check that out, that's weird", "Wow, look over there, that's odd", "Take a look at that, it's pretty strange", "Oh my, what's that? That's unusual", "What's that? That's rather peculiar"]},
 	"Aggressiveness":{
-		0: ["Aww, that's so sweet!", "How adorable!", "Oh, that's just too cute","Look at that, it's heartwarming", "That's so precious!"],
-		1: ["Oh no, that's terrifying!", "Yikes, I'm scared!", "That's giving me the creeps","I'm getting goosebumps", "Oh wow, that's really freaking me out!"]},
+		1: ["Let's do this!", "Time to fight!", "Thug sighted!", "Let's the battle begin!"]}
 	}
 var _emotions : Dictionary = {
-	"Striking": {
-		1: ["Wonder"]},
 	"Aggressiveness":{
-		0: ["Happy"],
-		1: ["Scared"]}
+		1: ["Angry"]}
 	}
 var _actionsOnHit : Dictionary = {
-	"Aggressiveness":{
-		1: ["setEmotion","Pain"]}
+	"Aggressiveness":{1: ["setEmotion","Angry"]}
 	}
 var _actionsOnLeaveHit : Dictionary = {}
 #endregion
@@ -47,11 +42,10 @@ func _physics_process(delta):
 	billy_lee.move_and_slide()
 
 func _controls():
-	#TODO FIX DIAGONALS DO SCALE WRONG
 	_direction = Input.get_vector("move_left","move_right","move_up","move_down")
 	if (_direction.x):
-		if (_lastDirection != _direction.x):
-			_lastDirection = _direction.x
+		if (_lastDirection != sign(_direction.x)):
+			_lastDirection = sign(_direction.x)
 			_dude_guy.scale.x=-1
 			billy_lee.scale.x=-2
 		_dude_guy.velocity.x =  max(_dude_guy.velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if _direction.x<0 else min(_dude_guy.velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
@@ -77,5 +71,21 @@ func _controls():
 		billy_lee.hit()
 
 func _on_billy_lee_enemy_hit(body):
+	_timesHit = 0
 	_dude_guy.setEmotion("Happy")
+	_dude_guy.talk("Take that!")
 	body.getHit(billy_lee.position.x - body.position.x)
+
+func _on_dude_guy_talking_signal(text):
+	_text_box.setText(text)
+
+func _on_abobo_enemy_hits(body):
+	if (body.name == "DudeGuy"):
+		if (_timesHit<3):
+			_timesHit += 1
+			_dude_guy.setEmotion("Pain")
+			_dude_guy.talk("Ouch")
+		else:
+			_timesHit = 0
+			_dude_guy.setEmotion("Sad")
+			_dude_guy.talk("It hurts!")
