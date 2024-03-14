@@ -23,7 +23,6 @@ animations = [{
 script = ExtResource("1_ihuhv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_i2n26")
 
 [node name="Head" parent="." instance=ExtResource("1_pupqh")]

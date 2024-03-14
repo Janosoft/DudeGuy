@@ -2,12 +2,12 @@ extends Sprite2D
 
 #region Privated Variables
 @onready var _head = $Head
-@onready var animated_sprite_2d = $AnimatedSprite2D
+@onready var _animated_sprite_2d = $AnimatedSprite2D
 var _temperature : int = 0
 #endregion
 
 func hideBody():
-	animated_sprite_2d.visible = false;
+	_animated_sprite_2d.visible = false;
 
 func talk(words: String) -> void:
 	_head.talk(words)
