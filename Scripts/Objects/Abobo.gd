@@ -28,8 +28,7 @@ func getHit(fromPosition):
 
 func _move():
 	if (_isHitting):
-		velocity.x = lerp(velocity.x,0.0,0.01)
-		velocity.y = lerp(velocity.y,0.0,0.01)
+		velocity = Vector2(0,0)
 	else:
 		if (_lastDirection != sign(direction.x)):
 			_lastDirection = sign(direction.x)
@@ -42,15 +41,10 @@ func _move():
 			velocity.y = min(velocity.y + _SPEED, _MAXSPEED)
 		elif (direction.y<0):
 			velocity.y = max(velocity.y - _SPEED, -_MAXSPEED)
-	
-	if (_isHitting == false):
-		if (direction.x or direction.y):
-			_animated_sprite_2d.play("walk")
-		else:
-			_animated_sprite_2d.play("default")
+		#Animate
+		_animated_sprite_2d.play("walk")
 
 func _hit():
-	_isHitting = true
 	_animated_sprite_2d.play("hit_" + str(randi() % 2 + 1))
 	_hitbox_timer.start()
 
@@ -59,14 +53,15 @@ func _on_hitbox_body_entered(body):
 	_hitbox_collision_shape_2d.set_deferred("disabled", true)
 
 func _on_hitbox_timer_timeout():
-	_isHitting = false
 	_hitbox_collision_shape_2d.disabled= false
 
 func _on_hitzone_body_entered(body):
+	_isHitting = true
 	_hit()
 	_hitzone_collision_shape_2d.set_deferred("disabled", true)
 	_hitzone_timer.wait_time = randf_range(2.0, 4.0)
 	_hitzone_timer.start()
 
 func _on_hitzone_timer_timeout():
+	_isHitting = false
 	_hitzone_collision_shape_2d.disabled= false
