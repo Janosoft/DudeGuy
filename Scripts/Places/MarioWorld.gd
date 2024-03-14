@@ -91,7 +91,6 @@ func _on_brick_boring_achievement():
 	_dude_guy.talk("that was frustrating")
 
 func _on_dude_guy_talking_signal(text):
-	print_debug("action")
 	_text_box.setText(text)
 
 func _on_game_timer_timeout():
