@@ -45,7 +45,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvylp"]
-size = Vector2(16, 32)
+size = Vector2(16, 28)
 
 [node name="SuperMario" type="CharacterBody2D"]
 collision_layer = 2
@@ -57,4 +57,6 @@ autoplay = "default"
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_wvylp")
+debug_color = Color(0, 0.623529, 0.537255, 0.419608)

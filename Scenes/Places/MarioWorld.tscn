@@ -374,11 +374,11 @@ layer_0/tile_data = PackedInt32Array(851968, 524288, 2, 851969, 524288, 2, 85197
 position = Vector2(2590, 152)
 
 [node name="SuperMario" parent="." instance=ExtResource("4_2anej")]
-position = Vector2(23, 153)
-scale = Vector2(2, 2.4)
+position = Vector2(24, 150)
+scale = Vector2(2, 2.5)
 
 [node name="DudeGuy" parent="." instance=ExtResource("1_28rhf")]
-position = Vector2(22, 164)
+position = Vector2(23, 164)
 bodyVisible = false
 
 [node name="Objects" type="Node2D" parent="."]

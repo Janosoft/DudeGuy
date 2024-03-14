@@ -6,12 +6,13 @@ signal gameOver
 
 #region Privated Variables
 @onready var _dude_guy = $DudeGuy
+@onready var _super_mario = $SuperMario
 @onready var _text_box = $CanvasLayer/TextBox
 @onready var _game_label = $CanvasLayer/GameLabel
 @onready var _game_timer = $CanvasLayer/GameTimer
 const _SPEED = 10
 const _MAXSPEED = 125
-const _JUMP_VELOCITY = 500
+const _JUMP_VELOCITY = 430
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _direction = 1
 var _lastDirection = 1
@@ -62,22 +63,28 @@ func _controls():
 	if _dude_guy.is_on_floor():
 		if Input.is_action_just_pressed("move_up"):
 			_dude_guy.velocity.y = - _JUMP_VELOCITY
+			_super_mario.velocity.y = - _JUMP_VELOCITY
 	_direction = Input.get_axis("move_left", "move_right")	
 	if _direction:
 		if _lastDirection != _direction:
 			_lastDirection = _direction
 			_dude_guy.scale.x=-1
+			_super_mario.scale.x=-2
 		_dude_guy.velocity.x =  max(_dude_guy.velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if _direction<0 else min(_dude_guy.velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
+		_super_mario.velocity.x =  _dude_guy.velocity.x
 	else:
-		_dude_guy.velocity.x = lerp(_dude_guy.velocity.x,0.0,0.2)	
+		_dude_guy.velocity.x = 0
+		_super_mario.velocity.x = _dude_guy.velocity.x 
 	
 	#Limits the movements inside the level
 	_dude_guy.position.x = clamp(_dude_guy.position.x, 17, _worldsize)
+	_super_mario.position.x = _super_mario.position.x
 
 func _gameOver():
 	print_debug('Game Over')
 	set_process(false)
 	set_physics_process(false)
+	_super_mario.set_physics_process(false)
 	emit_signal("gameOver")
 
 func _on_brick_boring_achievement():
