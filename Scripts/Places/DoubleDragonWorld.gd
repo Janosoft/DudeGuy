@@ -10,6 +10,8 @@ signal gameOver
 @onready var _abobo = $Abobo
 @onready var _background = $Background
 @onready var _text_box = $CanvasLayer/TextBox
+@onready var _game_label = $CanvasLayer/GameLabel
+@onready var _game_timer = $CanvasLayer/GameTimer
 const _SPEED = 10
 const _MAXSPEED = 125
 const _JUMP_VELOCITY = 350.0
@@ -36,6 +38,10 @@ func _ready():
 	_dude_guy.emotions= _emotions
 	_dude_guy.actionsOnHit= _actionsOnHit
 	_dude_guy.actionsOnLeaveHit= _actionsOnLeaveHit
+
+func _process(delta):
+	var time = _game_timer.time_left
+	_game_label.text = "%02d" % fmod(time,60)
 	
 func _physics_process(delta):
 	_controls()
@@ -97,3 +103,12 @@ func _on_abobo_enemy_hits(body):
 			_timesHit = 0
 			_dude_guy.setEmotion("Sad")
 			_dude_guy.talk("It hurts!")
+
+func _gameOver():
+	print_debug('Game Over')
+	set_process(false)
+	set_physics_process(false)
+	emit_signal("gameOver")
+	
+func _on_timer_timeout():
+	_gameOver()
