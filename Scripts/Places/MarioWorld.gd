@@ -47,8 +47,7 @@ func _ready():
 	_dude_guy.actionsOnLeaveHit= _actionsOnLeaveHit
 
 func _process(delta):
-	var time = _game_timer.time_left
-	_game_label.text = "%02d" % fmod(time,60)
+	_game_label.text = "%02d" % fmod(_game_timer.time_left,60)
 
 func _physics_process(delta):
 	_apply_gravity(delta)
@@ -64,7 +63,8 @@ func _controls():
 		if Input.is_action_just_pressed("move_up"):
 			_dude_guy.velocity.y = - _JUMP_VELOCITY
 			_super_mario.velocity.y = - _JUMP_VELOCITY
-	_direction = Input.get_axis("move_left", "move_right")	
+	
+	_direction = Input.get_axis("move_left", "move_right")
 	if _direction:
 		if _lastDirection != _direction:
 			_lastDirection = _direction
@@ -72,26 +72,26 @@ func _controls():
 			_super_mario.scale.x=-2
 		_dude_guy.velocity.x =  max(_dude_guy.velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if _direction<0 else min(_dude_guy.velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
 		_super_mario.velocity.x =  _dude_guy.velocity.x
-	else:
-		_dude_guy.velocity.x = 0
+		#Limits the movements inside the level
+		_dude_guy.position.x = clamp(_dude_guy.position.x, 17, _worldsize)
+		_super_mario.position.x = _dude_guy.position.x
+	elif (abs(_dude_guy.velocity.x)>0):
+		_dude_guy.velocity.x = 0 
 		_super_mario.velocity.x = _dude_guy.velocity.x 
-	
-	#Limits the movements inside the level
-	_dude_guy.position.x = clamp(_dude_guy.position.x, 17, _worldsize)
-	_super_mario.position.x = _super_mario.position.x
 
 func _gameOver():
 	print_debug('Game Over')
+	emit_signal("gameOver")
 	set_process(false)
 	set_physics_process(false)
 	_super_mario.set_physics_process(false)
-	emit_signal("gameOver")
 
 func _on_brick_boring_achievement():
 	_dude_guy.setEmotion("Sad")
 	_dude_guy.talk("that was frustrating")
 
 func _on_dude_guy_talking_signal(text):
+	print_debug("action")
 	_text_box.setText(text)
 
 func _on_game_timer_timeout():
