@@ -40,8 +40,7 @@ func _ready():
 	_dude_guy.actionsOnLeaveHit= _actionsOnLeaveHit
 
 func _process(delta):
-	var time = _game_timer.time_left
-	_game_label.text = "%02d" % fmod(time,60)
+	_game_label.text = "%02d" % fmod(_game_timer.time_left,60)
 	
 func _physics_process(delta):
 	_controls()

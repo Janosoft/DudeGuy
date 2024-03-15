@@ -22,7 +22,7 @@ func _apply_gravity(delta):
 		velocity.y += _gravity * delta
 
 func _move(delta):
-	if !_dying: #Dont move if it's dying
+	if (!_dying and velocity.x == 0): #Dont move if it's dying
 		velocity.x = _SPEED * delta * _direction
 	if is_on_wall():
 		_direction *= -1

@@ -15,7 +15,7 @@ var direction: Vector2 = Vector2(0,0)
 var _lastDirection = -1
 var _isHitting = false
 const _SPEED = 5
-const _MAXSPEED = 10
+const _MAXSPEED = 15
 #endregion
 
 func _physics_process(delta):
@@ -42,7 +42,8 @@ func _move():
 		elif (direction.y<0):
 			velocity.y = max(velocity.y - _SPEED, -_MAXSPEED)
 		#Animate
-		_animated_sprite_2d.play("walk")
+		if (!velocity.is_zero_approx()):
+			_animated_sprite_2d.play("walk")
 
 func _hit():
 	_animated_sprite_2d.play("hit_" + str(randi() % 2 + 1))

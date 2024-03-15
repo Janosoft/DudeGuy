@@ -49,7 +49,7 @@ func _physics_process(delta):
 	
 func _controls():
 	_messi.direction = Input.get_axis("move_left", "move_right")
-	_ronaldo.direction = 1 if (_messi.position.x - _ronaldo.position.x)>0 else 0
+	_ronaldo.direction = sign( _messi.position.x - _ronaldo.position.x)
 
 func _gameOver():
 	print_debug('Game Over')

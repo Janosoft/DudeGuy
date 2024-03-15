@@ -12,11 +12,11 @@ var _isHitting = false
 #endregion
 
 func walk():
-	if (!_isHitting and _animated_sprite_2d.animation!= "walk"):
+	if (!_isHitting and _animated_sprite_2d.animation != "walk"):
 		_animated_sprite_2d.play("walk")
 
 func stand():
-	if (!_isHitting and _animated_sprite_2d.animation!= "default"):
+	if (!_isHitting and _animated_sprite_2d.animation != "default"):
 		_animated_sprite_2d.play("default")
 
 func hit():
