@@ -27,8 +27,7 @@ Although I considered adding 'ears' to the character, I decided that the project
 I hope my project inspires others; that would be the greatest reward for me.
 
 ## Presentation
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Wrb0ImGhQqo" frameborder="0" allowfullscreen></iframe>
-
+[![Presentation Video](https://img.youtube.com/vi/Wrb0ImGhQqo/maxresdefault.jpg)](https://www.youtube.com/watch?v=Wrb0ImGhQqo)
 
 # How to install
 * Install Godot 4.2.1
