@@ -25,3 +25,13 @@ By testing the character in different environments, I discovered how to improve 
 Although I considered adding 'ears' to the character, I decided that the project was already complex enough. My goal is not to create a video game, but to demonstrate how to implement an interactive character in an environment, offering developers the opportunity to learn and adapt these techniques to their needs.
 
 I hope my project inspires others; that would be the greatest reward for me.
+
+## Presentation
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Wrb0ImGhQqo" frameborder="0" allowfullscreen></iframe>
+
+
+# How to install
+* Install Godot 4.2.1
+* Clone the repository: git clone git@github.com:Janosoft/DudeGuy.git
+* Open the project with Godot
+* Run with F5
