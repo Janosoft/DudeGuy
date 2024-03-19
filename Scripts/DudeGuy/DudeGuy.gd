@@ -94,11 +94,12 @@ func actionOnHitCalculator(thingStatus: Dictionary):
 				else: #Run without params
 					callable.call()
 			else:
-				print_debug('action doesnt have a function... do nothing')
+				#print_debug('action doesnt have a function... do nothing')
+				pass
 		else:
-			
-			print_debug(actionsOnHit[maxStatus])
-			print_debug('action doesnt exist... do nothing')
+			#print_debug(actionsOnHit[maxStatus])
+			#print_debug('action doesnt exist... do nothing')
+			pass
 	
 func actionOnLeaveHitCalculator(thingStatus: Dictionary):
 	var maxStatus = ''

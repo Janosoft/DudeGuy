@@ -21,7 +21,7 @@ func _physics_process(delta):
 	_move(delta)
 	move_and_slide()
 
-func _move(delta):
+func _move(_delta):
 	if direction:
 		velocity.x =  max(velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if direction<0 else min(velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
 		position.x = clamp(position.x,32,_screensize.x - 32) #Limit movements within the screen

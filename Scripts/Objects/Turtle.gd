@@ -7,7 +7,6 @@ var status = {'Aggressiveness' : 1}
 #region Privated Variables
 @onready var _screensize = get_viewport_rect().size
 @onready var _animatedSprite = $AnimatedSprite2D
-@onready var _hitbox = $Hitbox
 @onready var _hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitbox_timer = $HitboxTimer
 const _SPEED = 10

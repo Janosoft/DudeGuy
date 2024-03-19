@@ -1,9 +1,5 @@
 extends Node2D
 
-#region Public Variables
-signal gameOver
-#endregion
-
 #region Privated Variables
 @onready var _dude_guy = $DudeGuy
 @onready var _super_mario = $SuperMario
@@ -46,7 +42,7 @@ func _ready():
 	_dude_guy.actionsOnHit= _actionsOnHit
 	_dude_guy.actionsOnLeaveHit= _actionsOnLeaveHit
 
-func _process(delta):
+func _process(_delta):
 	_game_label.text = "%02d" % fmod(_game_timer.time_left,60)
 
 func _physics_process(delta):
@@ -80,11 +76,11 @@ func _controls():
 		_super_mario.velocity.x = _dude_guy.velocity.x 
 
 func _gameOver():
-	print_debug('Game Over')
-	emit_signal("gameOver")
+	print_debug('Change World')
 	set_process(false)
 	set_physics_process(false)
 	_super_mario.set_physics_process(false)
+	get_tree().change_scene_to_file("res://Scenes/Places/TsubasaWorld.tscn")
 
 func _on_brick_boring_achievement():
 	_dude_guy.setEmotion("Sad")

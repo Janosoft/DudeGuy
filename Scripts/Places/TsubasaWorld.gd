@@ -1,9 +1,5 @@
 extends Node2D
 
-#region Public Variables
-signal gameOver
-#endregion
-
 #region Privated Variables
 @onready var _dude_guy = $DudeGuy
 @onready var _messi = $Messi
@@ -43,7 +39,7 @@ func _process(delta):
 	var time = _game_timer.time_left
 	_game_label.text = "%02d" % fmod(time,60)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	_controls()
 	if (_ball.visible): _ball.move_and_slide()
 	
@@ -52,10 +48,10 @@ func _controls():
 	_ronaldo.direction = sign( _messi.position.x - _ronaldo.position.x)
 
 func _gameOver():
-	print_debug('Game Over')
+	print_debug('Change World')
 	set_process(false)
 	set_physics_process(false)
-	emit_signal("gameOver")
+	get_tree().change_scene_to_file("res://Scenes/Places/DoubleDragonWorld.tscn")
 
 func _on_dude_guy_talking_signal(text):
 	_label.text = text

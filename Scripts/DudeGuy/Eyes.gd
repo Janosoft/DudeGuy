@@ -17,7 +17,7 @@ func _ready():
 	var rootNode = get_tree().get_root().get_child(0)
 	_dudeNode = rootNode.find_child("DudeGuy")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if (_rayCast.enabled):
 		_aim()
 		_checkObjectCollision()

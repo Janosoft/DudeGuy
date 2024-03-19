@@ -1,9 +1,5 @@
 extends Node2D
 
-#region Public Variables
-signal gameOver
-#endregion
-
 #region Privated Variables
 @onready var _dude_guy = $DudeGuy
 @onready var _billy_lee = $BillyLee
@@ -104,10 +100,10 @@ func _on_abobo_enemy_hits(body):
 			_dude_guy.talk("It hurts!")
 
 func _gameOver():
-	print_debug('Game Over')
+	print_debug('Change World')
 	set_process(false)
 	set_physics_process(false)
-	emit_signal("gameOver")
+	get_tree().change_scene_to_file("res://Scenes/Places/TestEnvironment.tscn")
 	
 func _on_timer_timeout():
 	_gameOver()
