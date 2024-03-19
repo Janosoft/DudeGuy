@@ -27,6 +27,9 @@ Although I considered adding 'ears' to the character, I decided that the project
 I hope my project inspires others; that would be the greatest reward for me.
 
 ## Presentation
+
+Click on the image to see the presentation video
+
 [![Presentation Video](https://img.youtube.com/vi/Wrb0ImGhQqo/maxresdefault.jpg)](https://www.youtube.com/watch?v=Wrb0ImGhQqo)
 
 # How to install
