@@ -1,5 +1,7 @@
 # DudeGuy
 
+Made in Godot 4.2.1 using GDScript by Alejandro Martín Lodes
+
 ## Project Overview
 
 My passion for programming video games led me to discover Godot a few months ago. Inspired by classics like Pacman, Galaga, and Super Mario, I began to explore how these games were created 40 years ago and how development has evolved to the present day. I focused on facial animation, an element absent in the pixel art of that era.
