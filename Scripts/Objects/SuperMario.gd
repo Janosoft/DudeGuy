@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #region Privated Variables
-@onready var _animatedSprite = $AnimatedSprite2D
+@onready var _animatedSprite = $AnimatedSprite2D #super mario bodysuit
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #endregion
 

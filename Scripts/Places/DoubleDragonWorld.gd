@@ -36,14 +36,18 @@ func _ready():
 	_dude_guy.actionsOnLeaveHit= _actionsOnLeaveHit
 
 func _process(delta):
+	#shows the remaining time
 	_game_label.text = "%02d" % fmod(_game_timer.time_left,60)
 	
 func _physics_process(delta):
+	#DudeGuy's body is hidden in Node
 	_controls()
 	_dude_guy.move_and_slide()
 	_billy_lee.move_and_slide()
 
 func _controls():
+	#moves in all directions
+	#Billy's body and DudeGuy head moves together
 	_direction = Input.get_vector("move_left","move_right","move_up","move_down")
 	if (_direction.x or _direction.y):
 		_billy_lee.walk()
@@ -67,7 +71,7 @@ func _controls():
 		_dude_guy.velocity.y = lerp(_dude_guy.velocity.y,0.0,0.2)
 		_billy_lee.velocity.y = lerp(_billy_lee.velocity.y,0.0,0.2)
 	
-	#Limits the movements inside the level
+	#limits the movements inside the level
 	_dude_guy.position.x = clamp(_dude_guy.position.x, 17, _background.texture.get_size().x-50)
 	_dude_guy.position.y = clamp(_dude_guy.position.y, 116, _background.texture.get_size().y)
 	_billy_lee.position.x = clamp(_billy_lee.position.x, 17, _background.texture.get_size().x-50)
@@ -76,19 +80,22 @@ func _controls():
 	if Input.is_action_just_pressed("fire"):
 		_billy_lee.hit()
 	
-	#Moves Abobo
+	#moves Abobo towards the player's direction
 	_abobo.direction = Vector2(sign(_dude_guy.position.x + 17 - _abobo.position.x), sign(_dude_guy.position.y - 17 - _abobo.position.y))
 
 func _on_billy_lee_enemy_hit(body):
+	#hit something
 	_timesHit = 0
 	_dude_guy.setEmotion("Happy")
 	_dude_guy.talk("Take that!")
 	body.getHit(_billy_lee.position.x - body.position.x)
 
 func _on_dude_guy_talking_signal(text):
+	#shows the text in the TextBox
 	_text_box.setText(text)
 
 func _on_abobo_enemy_hits(body):
+	#Abobo hits player
 	if (body.name == "DudeGuy"):
 		if (_timesHit<3):
 			_timesHit += 1
@@ -100,6 +107,7 @@ func _on_abobo_enemy_hits(body):
 			_dude_guy.talk("It hurts!")
 
 func _gameOver():
+	#go to the next level
 	print_debug('Change World')
 	set_process(false)
 	set_physics_process(false)

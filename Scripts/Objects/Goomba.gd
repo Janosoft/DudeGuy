@@ -24,6 +24,7 @@ func _apply_gravity(delta):
 func _move(delta):
 	if (!_dying and velocity.x == 0): #Dont move if it's dying
 		velocity.x = _SPEED * delta * _direction
+	#if it hits the wall it turns around:
 	if is_on_wall():
 		_direction *= -1
 		scale.x=-1
@@ -42,5 +43,6 @@ func _on_animated_sprite_2d_animation_finished():
 	if _animatedSprite.animation == "die": queue_free()
 
 func _on_hitbox_body_entered(body):
+	#if is hit by something that is jumping dies
 	if !body.is_on_floor():
 		getHit()

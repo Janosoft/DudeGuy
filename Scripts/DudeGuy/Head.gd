@@ -21,6 +21,8 @@ func talk(words: String) -> void:
 	_mouth.articulate(words)
 
 func setEmotion(newEmotion: String):
+	#if necessary it adjusts the temperature
+	#tells the rest of the body to act.
 	if newEmotion in _emotionTemperature:
 		_temperature = _emotionTemperature[newEmotion]
 	else:

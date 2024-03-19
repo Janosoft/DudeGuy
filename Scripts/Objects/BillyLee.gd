@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #region Public Variables
-signal enemyHit
+signal enemyHit #warns that Billy (DudeGuy body) hit something
 #endregion
 
 #region Privated Variables
@@ -20,12 +20,14 @@ func stand():
 		_animated_sprite_2d.play("default")
 
 func hit():
+	#enable hitbox to hit and show the animation
 	_isHitting = true
-	_animated_sprite_2d.play("hit_" + str(randi() % 2 + 1))
+	_animated_sprite_2d.play("hit_" + str(randi() % 2 + 1)) #alternates the animation between 
 	_hitbox_collision_shape_2d.set_deferred("disabled", false)
 	_hitbox_timer.start()
 
 func _on_hit_box_body_entered(body):
+	#there was a hit
 	emit_signal("enemyHit", body)
 	_hitbox_collision_shape_2d.set_deferred("disabled", true)
 

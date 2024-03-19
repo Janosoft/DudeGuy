@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #region Public Variables
-signal enemyHits
+signal enemyHits #warns that Abobo hit something
 var status = {'Aggressiveness' : 1}
 var direction: Vector2 = Vector2(0,0)
 #endregion
@@ -23,10 +23,12 @@ func _physics_process(delta):
 	move_and_slide()
 
 func getHit(fromPosition):
+	#retreat if hit
 	if (fromPosition>0): position.x -= 10
 	else: position.x += 10
 
 func _move():
+	#walk in the direction where the world tells you
 	if (_isHitting):
 		velocity = Vector2(0,0)
 	else:
@@ -46,17 +48,21 @@ func _move():
 			_animated_sprite_2d.play("walk")
 
 func _hit():
-	_animated_sprite_2d.play("hit_" + str(randi() % 2 + 1))
+	#enable hitbox to hit and show the animation
+	_animated_sprite_2d.play("hit_" + str(randi() % 2 + 1)) #alternates the animation between 
 	_hitbox_timer.start()
 
 func _on_hitbox_body_entered(body):
+	#there was a hit
 	emit_signal("enemyHits", body)
 	_hitbox_collision_shape_2d.set_deferred("disabled", true)
 
 func _on_hitbox_timer_timeout():
+	#disables the hitbox
 	_hitbox_collision_shape_2d.disabled= false
 
 func _on_hitzone_body_entered(body):
+	#starts hitting when something gets too close to it and pauses
 	_isHitting = true
 	_hit()
 	_hitzone_collision_shape_2d.set_deferred("disabled", true)
@@ -64,5 +70,6 @@ func _on_hitzone_body_entered(body):
 	_hitzone_timer.start()
 
 func _on_hitzone_timer_timeout():
+	#stop hitting
 	_isHitting = false
 	_hitzone_collision_shape_2d.disabled= false

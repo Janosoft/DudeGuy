@@ -43,9 +43,11 @@ func _ready():
 	_dude_guy.actionsOnLeaveHit= _actionsOnLeaveHit
 
 func _process(_delta):
+	#shows the remaining time
 	_game_label.text = "%02d" % fmod(_game_timer.time_left,60)
 
 func _physics_process(delta):
+	#DudeGuy's body is hidden in Node
 	_apply_gravity(delta)
 	_controls()
 	_dude_guy.move_and_slide()
@@ -55,6 +57,7 @@ func _apply_gravity(delta):
 		_dude_guy.velocity.y += _gravity * delta
 
 func _controls():
+	#moves left and right and also jumps
 	if _dude_guy.is_on_floor():
 		if Input.is_action_just_pressed("move_up"):
 			_dude_guy.velocity.y = - _JUMP_VELOCITY
@@ -68,7 +71,7 @@ func _controls():
 			_super_mario.scale.x=-2
 		_dude_guy.velocity.x =  max(_dude_guy.velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if _direction<0 else min(_dude_guy.velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
 		_super_mario.velocity.x =  _dude_guy.velocity.x
-		#Limits the movements inside the level
+		#limits the movements inside the level
 		_dude_guy.position.x = clamp(_dude_guy.position.x, 17, _worldsize)
 		_super_mario.position.x = _dude_guy.position.x
 	elif (abs(_dude_guy.velocity.x)>0):
@@ -76,6 +79,7 @@ func _controls():
 		_super_mario.velocity.x = _dude_guy.velocity.x 
 
 func _gameOver():
+	#go to the next level
 	print_debug('Change World')
 	set_process(false)
 	set_physics_process(false)
@@ -87,6 +91,7 @@ func _on_brick_boring_achievement():
 	_dude_guy.talk("that was frustrating")
 
 func _on_dude_guy_talking_signal(text):
+	#shows the text in the TextBox
 	_text_box.setText(text)
 
 func _on_game_timer_timeout():

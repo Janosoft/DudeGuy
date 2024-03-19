@@ -23,28 +23,29 @@ func _ready():
 	setEmotion(_actualEmotion)
 	
 func talk(words: String):
-	emit_signal('talkingSignal', words)
+	emit_signal('talkingSignal', words) #used to display dialog in some TextBox
 	if (!_emotion_timer.is_stopped()):
 		_emotion_timer.stop()
-		_emotion_timer.wait_time = len(words) * 0.17
+		_emotion_timer.wait_time = len(words) * 0.17 # 0.17 is the animation speed of each letter
 		_emotion_timer.start()
 	_body.talk(words)
 
 func setEmotion(newEmotion: String):
-	_lastEmotion = _actualEmotion
+	_lastEmotion = _actualEmotion #to return to the previous state after a while
 	_body.setEmotion(newEmotion)
 	if (newEmotion != 'default'):
 		_emotion_timer.start()
 
 func setTemperature(newTemperature: String):
-	_lastTemperature= int(_temperature)
-	_temperature= int(newTemperature)
+	_lastTemperature = int(_temperature) #to be able to return to the previous state
+	_temperature = int(newTemperature)
 	_body.setTemperature(_temperature)
 
 func revertTemperature():
 	_body.setTemperature(_lastTemperature)
 
 func emotionCalculator(thingStatus: Dictionary)-> String :
+	#calculates the emotion according to what is established in the array of status -> emotion provided by the world
 	var maxStatus = ''
 	var maxValue = -100
 	
@@ -53,14 +54,15 @@ func emotionCalculator(thingStatus: Dictionary)-> String :
 			maxStatus = key
 			maxValue = thingStatus[key]
 	
-	#int(maxValue>0) allows to get more than an atribute and get 0 or 1 in the dialogs
-	#randi() % dialogs[maxStatus][int(maxValue>0)].size() takes an random text
+	#int(maxValue>0) allows to get more than an atribute and get 0 or 1 in the emotions
+	#randi() % emotions[maxStatus][int(maxValue>0)].size() takes an random text
 	if (maxStatus in emotions.keys()):
 		return emotions[maxStatus][int(maxValue>0)][randi() % emotions[maxStatus][int(maxValue>0)].size()]
 	else:
 		return 'default'
 
 func talkCalculator(thingStatus: Dictionary)-> String :
+	#calculates the dialog according to what is established in the array of status -> dialog provided by the world
 	var maxStatus = ''
 	var maxValue = -100
 	
@@ -74,6 +76,7 @@ func talkCalculator(thingStatus: Dictionary)-> String :
 	return dialogs[maxStatus][int(maxValue>0)][randi() % dialogs[maxStatus][int(maxValue>0)].size()]
 
 func actionOnHitCalculator(thingStatus: Dictionary):
+	#calculates the function to execute according to what is established in the array of status -> function,parameter provided by the world
 	var maxStatus = ''
 	var maxValue = -100
 	
@@ -102,6 +105,7 @@ func actionOnHitCalculator(thingStatus: Dictionary):
 			pass
 	
 func actionOnLeaveHitCalculator(thingStatus: Dictionary):
+	#calculates the function to execute according to what is established in the array of status -> function,parameter provided by the world
 	var maxStatus = ''
 	var maxValue = -100
 	
@@ -126,6 +130,7 @@ func actionOnLeaveHitCalculator(thingStatus: Dictionary):
 			print_debug('action doesnt exist... do nothing')
 
 func checkObject(thing: Object):
+	#used by the eyes to act accordingly to what is seen
 	if ('status' in thing):
 		var newEmotion:String = emotionCalculator(thing.status)
 		var words:String = talkCalculator(thing.status)
@@ -134,16 +139,18 @@ func checkObject(thing: Object):
 
 #region Catch Signals#
 func _on_hitbox_body_entered(body):
+	#runs dynamic action
 	#print_debug("Trasspassing: " + body.name)
 	#print_debug("Action: " + body.status)
 	if ("status" in body): actionOnHitCalculator(body.status)
 	
 func _on_hitbox_body_exited(body):
+	#runs dynamic action
 	#print_debug("Trasspassing: " + body.name)
 	#print_debug("Action: " + body.status)
 	if ("status" in body): actionOnLeaveHitCalculator(body.status)
 
 func _on_emotion_timer_timeout():
+	#restores excitement after time runs out
 	setEmotion('default')
-
 #endregion

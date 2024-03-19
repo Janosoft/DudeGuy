@@ -7,6 +7,7 @@ var _temperature : int = 0
 #endregion
 
 func hideBody():
+	#Used to show only the head
 	_animated_sprite_2d.visible = false;
 
 func talk(words: String) -> void:

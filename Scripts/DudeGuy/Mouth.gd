@@ -9,6 +9,7 @@ func _ready():
 	_animationPlayer.current_animation = "default"
 
 func _getVocals(words: String) -> String:
+	#people only express vowels with their mouth
 	#CONVERTS ALEJANDRO MARTIN LODES
 	#INTO     AAEEAAAOO AAAIII OOOEE
 	#print_debug (words)
@@ -25,7 +26,7 @@ func _getVocals(words: String) -> String:
 						"Ó": "O",
 						"Ú": "U",
 						"Y": "I",
-						"QUE": "QEE",
+						"QUE": "QEE",#only for Spanish
 					}
 
 	#REMOVE THE ACCENTS OR FIX KNOWN WORDS
@@ -49,6 +50,7 @@ func _getVocals(words: String) -> String:
 	return response
 
 func articulate(words: String) -> void:
+	#animate the mouth
 	if (_animationPlayer.is_playing()): _animationPlayer.clear_queue() #Prevents words from accumulating
 	var vocals: String = _getVocals(words)
 	const ACCEPT: String = "AEIOU"

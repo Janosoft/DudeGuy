@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #region Public Variables
-signal got_ball
+signal got_ball #warns that got the ball back
 @onready var ball = $Hitbox/CollisionShape2D #used to get actual ball position
 var status = {'WithBall' : 1}
 var direction = 1
@@ -22,6 +22,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _move(_delta):
+	#moves left and right
 	if direction:
 		velocity.x =  max(velocity.x - _SPEED, -_MAXSPEED) * _currentSpeed if direction<0 else min(velocity.x + _SPEED, _MAXSPEED) * _currentSpeed
 		position.x = clamp(position.x,32,_screensize.x - 32) #Limit movements within the screen
@@ -30,12 +31,14 @@ func _move(_delta):
 		position.x = clamp(position.x,32,_screensize.x - 32) #Limit movements within the screen
 
 func hit():
+	#if he gets hit he loses the ball
 	status['WithBall'] = 0
 	_animated_sprite_2d.play("Noball")
-	_hitbox.monitoring = false
+	_hitbox.monitoring = false #prevents from continually losing the ball
 	_hitbox_timer.start()
 
 func gotBall():
+	#recover the ball
 	status['WithBall'] = 1
 	_animated_sprite_2d.play("default")
 	emit_signal("got_ball")

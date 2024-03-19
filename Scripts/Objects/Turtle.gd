@@ -27,6 +27,7 @@ func _apply_gravity(delta):
 		velocity.y += _gravity * delta
 
 func _move():
+	#moves left and right
 	if abs(velocity.x) == 0:
 		if !_hidding: 
 			velocity.x = _SPEED * _direction * _multiplicator
@@ -40,6 +41,7 @@ func _move():
 		position.x += 1 * _direction #Not to get Stuck
 
 func getHit():
+	#if it receives a hit it hides and moves faster
 	_direction *= -1
 	if (!_hidding):
 		_hidding = true
@@ -47,16 +49,17 @@ func getHit():
 		velocity.x = _SPEEDHIDDING * _direction * _multiplicator
 
 func _on_hitbox_body_entered(body):
-	#Get hits only from above
+	#get hits only from above 
 	if !body.is_on_floor():
 		hitbox_timer.start()
-		_hitbox_collision_shape_2d.set_deferred("disabled", true)
+		_hitbox_collision_shape_2d.set_deferred("disabled", true) #avoids consecutive hits
 		getHit()
 	
 func _on_hitbox_timer_timeout():
 	_hitbox_collision_shape_2d.set_deferred("disabled", false)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
+	#faster respawn
 	if (_direction == 1): scale.x = -1
 	_direction = -1
 	_multiplicator *= 1.25
